@@ -3,25 +3,28 @@
 **Podcast:** Soul Up with Maayan Ciner, Episode 7
 **Episode link:** *[add the Spotify link once it's live]*
 **Format:** You talking to camera (vertical 9:16), with B-roll and two simple "floor shots" cut in
-**Length:** about 50 seconds (about 45 if we cut the science beat)
-**Goal:** Get people to listen to Episode 7
-**Main call to action:** "Comment EMPATH" (you send the link by DM)
+**Length:** about 60 seconds (a 40-second cut is in the edit plan)
+**Goal:** Give people something real they can use today, so they *want* more, and then gently let them know where to find it: Episode 7 on Spotify
+**Call to action:** one soft spoken line at the end ("It's on Spotify, whenever you need it"). The caption offers to DM the link to anyone who comments FEEL.
 
 ---
 
-## Why it's built this way
+## How it promotes without feeling like promotion
 
-| Part | What it does |
+The idea: **the reel is a complete gift, and the episode is "more of the same, whenever you want it."** People don't feel sold to when they've already been helped.
+
+| Choice | Why it works |
 |---|---|
-| **Hook:** "You walk into a room and in ten seconds you know who's upset…" | Taken straight from your intro. Sensitive people recognize themselves in the first line, so they stop scrolling: "that's me." |
-| **The sandwich line** | The funny, painfully true moment. It names the problem (they moved on, you didn't) without a lecture. |
-| **The hole picture** | The heart of the episode in one image people can *see*. It's easy to remember and easy to repeat to a friend, which is what makes a reel spread. |
-| **"Same love. Totally different result."** | The line people screenshot and quote. Short enough to sit on screen by itself. |
-| **"It's the drowning"** | One sentence of science so the idea feels proven, not just pretty. |
-| **One tool they can use today** | "Whose feeling is this?" is real value, so people **save** it. It's also the exact invitation you give at the end of the episode. |
-| **Holding back the other five tools** | Leaves a question open, especially for parents. The only way to get the rest is the episode. |
-| **One call to action: comment EMPATH** | Commenting the word is a small "that's me" moment. Comments help reach, and a DM gives them a link they can tap. Bonus: people who naturally write "I'm such an empath" also get the link. |
-| **Share line in the caption** | Your episode already ends with "send it to that one friend who feels everything." Instagram weighs **DM sends** heavily when showing reels to new people, so we use your own line. |
+| **About 54 of the 62 seconds are pure teaching** | The episode is mentioned once, at the very end, after they've already received something. By then it feels like a recommendation from a friend, not an ad. |
+| **Nothing is held back** | No "the secret is in the episode" teaser. They get the full idea (empathy vs. sympathy) and three tools that work on their own. When someone feels cared for, they want to come back to that person. |
+| **Hook: "For the ones who feel everything 🤍"** | It speaks to *who they are*, not to what you're offering. Sensitive people feel seen in the first second, and that's what makes them stop, stay, and follow. |
+| **"You're not too sensitive. You just never got the manual."** | The sweet moment. It takes away shame before it teaches anything, and it's straight from your episode intro. |
+| **The hole picture, filmed on the floor** | The "exciting" part: a visual people can see, remember, and repeat to a friend. That's what gets a reel shared. |
+| **Three tools as a short list** | Lists get **saved**, and Instagram counts saves as a strong signal that a reel is worth showing to more people. A small "save this 🤍" on screen is the only ask in the middle, and it's for *their* benefit. |
+| **The mantra before the invite** | The emotional high point comes right before you mention the episode, so the invite rides on warmth. |
+| **"It's on Spotify, whenever you need it"** | It presents the episode as support that's there for them, not as something to click right now. |
+| **End card: "Feel everything. Carry nothing."** | Your episode title, shown silently. Your brand is there, but it isn't loud. |
+| **Share line framed as care** | "If someone came to mind, send it to them." Sending it becomes an act of love, and DM shares are one of the strongest signals for reaching new people on Instagram. |
 
 ---
 
@@ -31,60 +34,69 @@
 
 ### Beat 1: Hook (0:00–0:06)
 - **SAY:** "You walk into a room and in ten seconds you know who's upset… and who's smiling but is definitely not fine."
-- **TEXT:** If you feel EVERYTHING, watch this 👀
-- **SHOT:** Close-up, chest up. Start mid-glance: your eyes scan left, then right, like you're reading a room, then land on the lens on *"definitely not fine."*
-- **EDIT:** No intro, no logo. The text is on screen from the first frame. Punch in on *"definitely not fine."*
+- **TEXT:** For the ones who feel everything 🤍
+- **SHOT:** Close-up, chest up. Start mid-glance: your eyes scan left, then right, like you're reading a room, then land on the lens with a small, knowing smile on *"definitely not fine."*
+- **EDIT:** No intro, no logo. The text is on screen from the first frame.
 
 ### Beat 2: The sandwich (0:06–0:10)
 - **SAY:** "They vent, then go eat a sandwich. You're still carrying it at midnight."
 - **TEXT:** They moved on. You didn't. 🫠
-- **EDIT:** Quick B-roll: a hand happily grabbing a sandwich, then cut to you in bed, eyes open, staring at the ceiling.
+- **EDIT:** Quick B-roll: a hand happily grabbing a sandwich, then cut to you in bed, eyes open, staring at the ceiling. This is the light, funny moment, so let it be cute.
 
-### Beat 3: Who taught you (0:10–0:13)
-- **SAY:** "A rabbi who's also a doctor explained it to me with one picture."
-- **TEXT:** Empathy vs. sympathy 🤍
-- **SHOT:** Talking to camera, leaning in a little, like you're about to tell a secret.
+### Beat 3: The reassurance (0:10–0:15)
+- **SAY:** "If that's you, you're not too sensitive. You just never got the manual."
+- **TEXT:** You're not "too sensitive." You just never got the manual. 📖
+- **SHOT:** Back to talking head. Slower and warmer, like you're saying it to one friend.
 
-### Beat 4: Sympathy (0:13–0:20)
-- **SAY:** "Your friend falls into a deep, muddy hole. Sympathy jumps in with her. Very loving… and now you're both stuck."
-- **TEXT:** 🕳️ Sympathy = jumping in
-- **SHOT (floor shot 1):** Phone propped low on the floor. You drop down into the frame and slump beside it, head in your hands.
-- **EDIT:** Soft "thud" sound and a small shake as you land. Slightly cooler, dimmer color on this shot.
+### Beat 4: Sympathy (0:15–0:24)
+- **SAY:** "A rabbi who's also a doctor taught me this. When your friend falls into a deep hole, sympathy jumps in with her. Now you're both stuck."
+- **TEXT:** 🕳️ Sympathy = jumping in with them
+- **SHOT (floor shot 1):** Start on the talking head for *"A rabbi who's also a doctor taught me this,"* then cut to the phone propped low on the floor. You drop down into the frame and slump beside it, head in your hands, on *"jumps in."*
+- **EDIT:** Soft "thud" sound as you land. Slightly cooler, dimmer color on this shot.
 
-### Beat 5: Empathy (0:20–0:28)
-- **SAY:** "Empathy kneels at the edge. 'I see you. I'm right here.' And because you're on solid ground… you can actually pull her out."
+### Beat 5: Empathy (0:24–0:31)
+- **SAY:** "Empathy kneels at the edge. 'I see you. I'm right here.' And from solid ground, you can help her out."
 - **TEXT:** 🤝 Empathy = kneeling at the edge
-- **SHOT (floor shot 2):** Phone lying on the floor, camera facing up. You kneel above it, look down into the lens, and reach your hand down toward it on *"pull her out."*
-- **EDIT:** Warm color on this shot, the opposite of Beat 4. Hold on your hand for a beat.
+- **SHOT (floor shot 2):** Phone lying on the floor, camera facing up. You kneel above it, look down into the lens, and slowly reach your hand toward it on *"help her out."*
+- **EDIT:** Warm, bright color on this shot, the opposite of Beat 4. A gentle swell in the music. Hold on your hand for a beat.
 
-### Beat 6: The line they'll quote (0:28–0:31)
+### Beat 6: The line they'll remember (0:31–0:34)
 - **SAY:** "Same love. Totally different result."
 - **TEXT:** Same love. Totally different result.
-- **SHOT:** Back to talking head. Say it slowly, then hold still for one second after.
-- **EDIT:** Text alone in the center of the screen, nothing else moving.
+- **SHOT:** Talking head. Say it slowly and quietly, then hold still for one second.
+- **EDIT:** Text alone in the center, nothing else moving.
 
-### Beat 7: The science (0:31–0:37) *(the beat we cut if it runs long)*
-- **SAY:** "Brain research backs this up. It's not compassion that burns us out. It's the drowning."
-- **TEXT:** It's not caring that burns you out. It's the drowning. 🌊
-- **TEXT (lower third):** Klimecki & Singer · neuroscience research
-- **SHOT:** Talking to camera, calm and certain.
+### Beat 7: The bridge (0:34–0:36)
+- **SAY:** "So how do I stay at the edge?"
+- **TEXT:** 3 ways to feel it without carrying it ⬇️
+- **TEXT (small, underneath):** save this for later 🤍
 
-### Beat 8: The tool (0:37–0:42)
-- **SAY:** "So next time you suddenly feel heavy, ask yourself: 'Whose feeling is this?'"
-- **TEXT:** Ask: "Whose feeling is this?" 🤔
-- **TEXT (second line, after a beat):** Mine… or someone else's?
-- **SHOT:** Hand on your chest, one slow breath, then ask the question softly into the lens.
+### Beat 8: Tool one (0:36–0:40)
+- **SAY:** "One: when I suddenly feel heavy, I ask, 'Whose feeling is this?'"
+- **TEXT:** 1. "Whose feeling is this?" 🤔
+- **SHOT:** Hand on your chest, a little pause, then ask the question softly into the lens.
 
-### Beat 9: The open loop (0:42–0:46)
-- **SAY:** "That's tool one. There are six, including one every parent needs."
-- **TEXT:** Tool 1 of 6 🤫
-- **SHOT:** Hold up one finger on *"tool one,"* then open your hand on *"six."*
+### Beat 9: Tool two (0:40–0:46)
+- **SAY:** "Two: I silently say, 'I see your pain,' then feel my feet on the floor."
+- **TEXT:** 2. See it. Name it. Come back. 👣
+- **EDIT:** B-roll of your bare feet pressing into the floor or a rug.
 
-### Beat 10: Call to action (0:46–0:52)
-- **SAY:** "It's all in Episode 7 of Soul Up. Comment EMPATH and I'll send it to you."
-- **TEXT:** Comment **EMPATH** 🎧 Ep. 7
-- **SHOT:** Warm smile, point down toward the comments.
-- **EDIT:** Podcast cover art slides in for the last 2 seconds. I'll cut so the last word lands right before the reel loops back to the room scan in Beat 1.
+### Beat 10: Tool three (0:46–0:50)
+- **SAY:** "Three: one long, slow exhale. Let it move through. Don't store it."
+- **TEXT:** 3. Let it move through 🌬️
+- **SHOT:** Take a real, visible exhale on camera and let your shoulders drop. People will breathe with you.
+
+### Beat 11: The mantra (0:50–0:54)
+- **SAY:** *(softly, hand on heart)* "I can feel your pain… without making it mine."
+- **TEXT:** I can feel your pain without making it mine. 🤍
+- **SHOT:** Close-up, eyes soft.
+- **EDIT:** The music drops almost to silence here. This is the emotional peak.
+
+### Beat 12: The soft invite (0:54–1:02)
+- **SAY:** "This week on Soul Up, I go deeper, with the Rambam and some beautiful brain research. It's on Spotify, whenever you need it."
+- **TEXT:** Soul Up · Episode 7 · on Spotify 🎧
+- **SHOT:** Relaxed and cozy: a cup of tea in your hands, or putting on headphones. Your episode opens with "grab your tea, get comfortable," so this matches.
+- **EDIT:** For the last 2 seconds, an end card with your cover art and the words **Feel everything. Carry nothing. 🤍** I'll cut it so it loops smoothly back to the room scan in Beat 1.
 
 ---
 
@@ -94,84 +106,91 @@
 >
 > They vent, then go eat a sandwich. You're still carrying it at midnight.
 >
-> A rabbi who's also a doctor explained it to me with one picture.
+> If that's you, you're not too sensitive. You just never got the manual.
 >
-> Your friend falls into a deep, muddy hole. Sympathy jumps in with her. Very loving… and now you're both stuck.
+> A rabbi who's also a doctor taught me this. When your friend falls into a deep hole, sympathy jumps in with her. Now you're both stuck.
 >
-> Empathy kneels at the edge. "I see you. I'm right here." And because you're on solid ground… you can actually pull her out.
+> Empathy kneels at the edge. "I see you. I'm right here." And from solid ground, you can help her out.
 >
 > Same love. Totally different result.
 >
-> Brain research backs this up. It's not compassion that burns us out. It's the drowning.
+> So how do I stay at the edge?
 >
-> So next time you suddenly feel heavy, ask yourself: "Whose feeling is this?"
+> One: when I suddenly feel heavy, I ask, "Whose feeling is this?"
 >
-> That's tool one. There are six, including one every parent needs.
+> Two: I silently say, "I see your pain," then feel my feet on the floor.
 >
-> It's all in Episode 7 of Soul Up. Comment EMPATH and I'll send it to you.
+> Three: one long, slow exhale. Let it move through. Don't store it.
+>
+> I can feel your pain… without making it mine.
+>
+> This week on Soul Up, I go deeper, with the Rambam and some beautiful brain research. It's on Spotify, whenever you need it.
 
-*About 150 words, roughly 52 seconds at a natural pace. Without the "brain research" lines, about 45 seconds.*
+*About 175 words, roughly 60–65 seconds at a natural pace. It runs longer than a typical reel on purpose: teaching reels with a short list are the ones people save and come back to.*
 
 ---
 
 ## Hook variations (film all three)
 
-Film each opening line so we can test them with Instagram's **Trial Reels**, which show a reel to non-followers first. We then post the version with the lowest skip rate.
+Film each opening line so we can test them with Instagram's **Trial Reels**, which show a reel to non-followers first. We then post the version with the lowest skip rate. All three are warm, not salesy.
 
 | | Say | On-screen text | Prop / action |
 |---|---|---|---|
-| **A (main)** | "You walk into a room and in ten seconds you know who's upset… and who's smiling but is definitely not fine." | If you feel EVERYTHING, watch this 👀 | Eyes scan the room, then land on the lens |
-| **B (call-out)** | "If you've ever been told you're 'too sensitive'… pull up a chair." | Ever been told you're "too sensitive"? | Pull a chair toward the camera and sit down on *"pull up a chair"* |
-| **C (your story)** | "For years I thought I was a rock. Spoiler alert: I was not a rock." | I thought I was a rock 🪨 | Hold up a stone, then set it down on *"I was not a rock"* |
+| **A (main)** | "You walk into a room and in ten seconds you know who's upset… and who's smiling but is definitely not fine." | For the ones who feel everything 🤍 | Eyes scan the room, then land on the lens |
+| **B (gentle call-out)** | "If you've ever been told you're 'too sensitive'… pull up a chair." | Ever been told you're "too sensitive"? | Pull a chair toward the camera and sit down on *"pull up a chair"* |
+| **C (your story)** | "For years I thought I was a rock. Spoiler alert: I was not a rock." | I thought I was a rock 🪨 | Hold up a smooth stone, then set it down on *"I was not a rock"* |
 
-*With hook C, I'll drop Beat 2 in the edit and go straight to "A rabbi who's also a doctor…", so the reel stays under a minute.*
+*With hook B, I'll drop "you're not too sensitive" from Beat 3 and keep only "You just never got the manual," since the hook already says it. With hook C, I'll drop Beat 2.*
 
 ---
 
 ## Caption (ready to paste)
 
+The caption works like a mini blog post: it gives the full value again in writing, so people save it. The episode is mentioned once, near the end.
+
 ```
-You're not "too much." Most people pick up two stations. You pick up two hundred. 📻
+For the ones who feel everything 🤍
 
-A rabbi who is also a medical doctor taught me the difference between two words that sound almost the same:
+If you've ever been told you're "too sensitive," I want you to hear this: you're not too much. You just never got the manual.
 
-🕳️ Sympathy = jumping into the hole with someone. Now you're both stuck.
-🤝 Empathy = kneeling at the edge. You feel it with them, but you stay on solid ground, so you can help pull them out.
+Here's the first page, from a rabbi who is also a doctor:
+🕳️ Sympathy jumps into the hole with someone. Now you're both stuck.
+🤝 Empathy kneels at the edge: "I see you. I'm right here." And from solid ground, you can help pull them out.
 
-Same love. Totally different result.
+3 small ways to stay at the edge:
+1. When you suddenly feel heavy, ask: "Whose feeling is this?"
+2. Silently say "I see your pain," then feel your feet on the floor and come back to you.
+3. One long, slow exhale. Let it move through you instead of storing it.
 
-In Episode 7 of Soul Up, I'm sharing:
-✨ why "compassion fatigue" might be the wrong name (it's not caring that exhausts us, it's the drowning)
-✨ what the Rambam's middle path teaches sensitive souls
-✨ 6 simple tools to feel everything and carry nothing, including one for every parent
+Save this for the next time someone's pain follows you home.
 
-🎧 Comment EMPATH and I'll DM you the episode, or find "Soul Up with Maayan Ciner" on Spotify.
+This week on Soul Up, I go deeper: why brain research says it isn't caring that burns us out, what a Chinese medicine doctor taught me about being a mirror, and the Rambam's middle path for sensitive souls. 🎧 It's on Spotify (link in bio). If you'd like, comment FEEL and I'll send it to you.
 
-Send this to the friend who feels everything. You know exactly who. She probably cried at a commercial this week. 🤍
+And if someone came to mind while you watched this, send it to them. They might need to hear that they're not too much. 🤍
 
 This is for education and inspiration, not a replacement for medical or mental health care. If you're carrying something heavy right now, please reach out to a professional you trust.
 
-#empath #highlysensitiveperson #boundaries #rambam #emotionalhealth
+#empath #highlysensitiveperson #boundaries #emotionalhealth #rambam
 ```
 
-**Pinned comment:**
-`Be honest: when someone vents to you, do you jump into the hole 🕳️ or kneel at the edge 🤝? 👇 (Comment EMPATH for the full episode 🎧)`
+**Pinned comment** (a question about *them*, not a link):
+`Which one are you trying this week: "Whose feeling is this?", feet on the floor, or the long exhale? 🤍`
 
-**DM reply to "EMPATH"** (set this up as an auto-reply in ManyChat, or send it by hand):
+**DM reply to "FEEL"** (set up as an auto-reply in ManyChat, or send it by hand):
 ```
 Hi love 💛 Here's Episode 7, The Empath's Secret: Feel Everything, Carry Nothing:
 [EPISODE LINK]
-This week, try just one thing: the next time you suddenly feel heavy, ask yourself "Whose feeling is this?" Tell me what you notice!
+This week, try just one thing: the next time you suddenly feel heavy, ask yourself "Whose feeling is this?" I'd love to hear what you notice.
 ```
 
-**Cover text** (keep it inside the center 3:4 area, because the profile grid crops the sides):
-`Feel everything. Carry nothing. 🤍`
-
-*Backup cover if you'd rather lead with the lesson:* `Empathy vs. sympathy 🕳️🤝`
+**Cover text** (keep it inside the center 3:4 area, because the profile grid crops the sides). Lead with what they'll get:
+`How to feel everything and carry nothing 🤍`
 
 ---
 
 ## Filming guide (so I can edit it well)
+
+**Mood:** warm and cozy, like a talk with a friend over tea. Soft window light, a plant or a soft blanket in the background, a natural top. This visual softness is a big part of why it won't feel like an ad.
 
 **Setup**
 - Vertical 9:16, 1080p or 4K, 30 fps. Use the back camera if you can.
@@ -179,67 +198,70 @@ This week, try just one thing: the next time you suddenly feel heavy, ask yourse
 - Face a window for soft light. Use a quiet room and a lav mic, or keep the phone close.
 
 **The two floor shots (Beats 4 and 5)**
-These are what make this reel feel different, so give them a few tries.
-- **Sympathy (slump):** Prop the phone on the floor against a book, angled up a little. Start standing out of frame, then sit down hard next to it and drop your head into your hands. Say the line as you land, or film it silent and I'll lay your talking-head audio over it.
-- **Empathy (reach down):** Lay the phone flat on the floor, screen up, back camera facing the ceiling. Kneel over it, look down into the lens, and slowly reach your hand toward it. A soft rug under the phone keeps it steady. Start recording with a timer so you don't have to touch it.
+These are what make the reel exciting to watch, so give them a few tries.
+- **Sympathy (slump):** Prop the phone on the floor against a book, angled up a little. Start standing out of frame, then sit down hard next to it and drop your head into your hands. Film it silent; I'll lay your talking-head audio over it.
+- **Empathy (reach down):** Lay the phone flat on the floor, screen up, back camera facing the ceiling. Kneel over it, look down into the lens, and slowly reach your hand toward it. Use the camera timer so you don't have to touch the phone.
 
 **Delivery**
 - Film **each beat as its own take**, 2–3 times. Between lines, **pause for 2 seconds and reset**; that gives me clean cuts.
-- Use about 20% more energy than feels natural. It reads as "normal" on screen.
-- Beat 6 ("Same love. Totally different result.") is the exception: say it **slower and quieter** than everything else.
+- Beats 1, 2 and 7–10: a little more energy than feels natural, since it reads as "normal" on screen.
+- Beats 3, 6 and 11: **slower and quieter.** These are the tender moments.
+- Beat 12: relaxed, like you're telling a friend about something you made for her. No "sales voice."
 - Film all three hooks (A, B, C).
 - Don't trim anything. Send me the raw clips.
 
 **B-roll** (5–10 seconds each, vertical, on your phone)
 - [ ] A hand grabbing a sandwich, or someone happily eating one (a family member's hands work great)
 - [ ] You lying in bed at night, eyes open, lit by a lamp or your phone
-- [ ] Walking through a doorway into a room (your point of view), for the hook
-- [ ] Your hand on your chest and one slow exhale
-- [ ] Washing your hands slowly (Tool five, "release afterward"), for Beat 9 or the Story
-- [ ] Your face reflected in a bowl of still water ("as in water a face reflects a face"), an optional ending shot or cover
-- [ ] Your phone showing *Soul Up* on Spotify, and you putting on headphones
+- [ ] Your bare feet pressing into the floor or a rug
+- [ ] Your hand on your chest, and one slow, visible exhale
+- [ ] Cozy ending: hands around a cup of tea, or you putting on headphones
+- [ ] Your phone showing *Soul Up* on Spotify
+- [ ] Optional: your face reflected in a bowl of still water ("as in water a face reflects a face"), a beautiful extra for a Story
 - [ ] Props for the hooks: a chair (B), a smooth stone (C)
 
 ---
 
 ## My edit plan
 
-- **Pace:** I'll remove every pause and breath, and change something on screen every 2–3 seconds (a cut, a zoom, B-roll, or text). The one place I *keep* the pause is Beat 6.
-- **First frame:** Hook text on screen right away, with no logo or intro. Most people decide within the first 2 seconds.
-- **Punch-in zooms** on key words: *definitely not fine, stuck, pull her out, drowning, EMPATH*.
-- **Color story:** the sympathy floor shot a little cool and dim, the empathy shot warm and bright. Viewers feel the difference before they think about it.
-- **Burned-in captions:** 2–4 words at a time, bold, with key words highlighted in your brand color. They sit in Instagram's safe zone (above the bottom UI and away from the buttons on the right), since most people watch on mute.
-- **Sound:** a warm instrumental bed kept low under your voice, a soft thud when you land in the "hole," a gentle swell when you reach down, and silence under Beat 6. If you want trending audio, add it in the Instagram app when posting, so the licensing is handled there.
-- **Ending:** podcast cover plus "Comment EMPATH 🎧", cut to loop smoothly back into the room scan.
+- **Pace:** quick cuts in the funny and teaching parts (something changes every 2–3 seconds: a cut, a zoom, B-roll, or text). I'll *keep* the pauses in Beats 3, 6 and 11, so the reel breathes like you do.
+- **First frame:** Hook text on screen right away, with no logo or intro.
+- **Gentle punch-in zooms** on: *definitely not fine, stuck, help her out, whose feeling is this*.
+- **Color story:** the sympathy floor shot cool and dim, the empathy shot warm and bright. Viewers feel the difference before they think about it.
+- **Burned-in captions:** 2–4 words at a time, in a soft rounded font, with key words in your brand color. They sit in Instagram's safe zone (above the bottom UI and away from the buttons on the right), since most people watch on mute.
+- **The three tools** each get a numbered card (1, 2, 3) that stays on screen a little longer than the captions, so people can pause and screenshot.
+- **Sound:** a soft piano or acoustic bed kept low under your voice, a soft thud when you land in the "hole," a gentle swell when you reach down, and near-silence under the mantra. If you want trending audio, add it in the Instagram app when posting, so the licensing is handled there.
+- **Ending:** cover art with "Feel everything. Carry nothing. 🤍", cut to loop back into the room scan.
 - **Export:** 1080×1920, H.264, 30 fps, high bitrate, loudness normalized for Instagram.
+- **Bonus 40-second cut** (to post later in the week): Beats 1, 3, 7–12. It skips the hole story and goes straight to the three tools, so it's a second reel from the same footage with no extra filming.
 
 ---
 
 ## Posting playbook
 
-1. **Test the hooks:** post A as the main reel and B and C as **Trial Reels**. Reuse the winner's style on future episodes.
-2. **Post at your peak time:** check Insights → Most active times.
-3. **First hour:** reply to every comment, and answer with a question to keep the thread going.
-4. **Share it to your Story** with a **link sticker** to the episode (Stories allow tappable links) and a poll: *"When someone vents to you, do you… 🕳️ Jump in / 🤝 Kneel at the edge"*.
-5. **A few days later, a follow-up Story** with a question sticker: *"Did you try asking 'Whose feeling is this?' What did you notice?"* Reshare the best answers (with permission).
-6. **Add it to your "Podcast" highlight.**
-7. **Optional follow-up post:** the six tools as a carousel, one tool per slide. Lists like this get saved a lot, and the last slide can point back to the episode.
-8. **Track:** skip rate (if it's high, the hook needs work), sends, EMPATH comments, and Episode 7 plays on Spotify that week.
+1. **Before posting:** put the Spotify link for Episode 7 in your bio (the link in your caption can't be tapped).
+2. **Test the hooks:** post A as the main reel and B and C as **Trial Reels**. Reuse the winner's style on future episodes.
+3. **Post at your peak time:** check Insights → Most active times.
+4. **First hour:** reply to every comment, warmly and with a question. ("Which one felt most like you?")
+5. **Share it to your Story** with a gentle poll: *"When someone vents to you, do you… 🕳️ Jump in / 🤝 Kneel at the edge"*. In a second Story, add a **link sticker** to the episode with "for the ones who feel everything 🤍" (Story links can be tapped).
+6. **A few days later, a follow-up Story** with a question sticker: *"Did you try asking 'Whose feeling is this?' What did you notice?"* Reshare the best answers (with permission).
+7. **Later in the week:** post the 40-second cut as a second reel.
+8. **Optional:** the three tools (or all six from the episode) as a carousel, one per slide. Carousels like this get saved a lot, and the last slide can say "the full conversation is on Spotify."
+9. **Track:** saves and sends (are people finding it useful?), skip rate (if it's high, the hook needs work), FEEL comments, and Episode 7 plays on Spotify that week.
 
 ---
 
 ## ⚠️ Check these before filming
 
-This time I worked from your full episode script, so the reel matches what the episode says. A few things only you can confirm:
+I worked from your full episode script, so everything in the reel matches what the episode says. A few things only you can confirm:
 
-1. **The episode link:** add it to the DM reply and this file once Episode 7 is live.
-2. **"Comment EMPATH":** this is a new keyword, so add it to ManyChat (FLOW is still set up for Episode 6), or plan to answer DMs by hand.
-3. **The open loop ("tool one of six, including one every parent needs"):** this matches Tool six in your script ("You don't have to fall apart to show you care"). If that part gets cut from the final recording, change the line to: *"That's tool one. The other five, plus what the Rambam teaches sensitive souls, are in the episode."*
-4. **Wording changes from recording:** I tightened a few lines so they fit in a reel (for example, "They vent, then go eat a sandwich"). If you said something differently on the episode and like it better, use your version.
-5. **The rabbi:** he stays unnamed, the same as in the episode. If you ever want to name him, ask him first.
+1. **The episode link:** add it to your bio, the DM reply, and this file once Episode 7 is live.
+2. **"Comment FEEL":** this is a new keyword, so add it to ManyChat (FLOW is set up for Episode 6), or plan to answer DMs by hand. In ManyChat, set the keyword to an *exact* match, or comments like "I feel this so much" will also get the DM. Some people might like that, but it's your choice.
+3. **Wording:** I tightened a few lines so they fit in a minute. If you said something differently on the episode and like it better, use your version.
+4. **The rabbi:** he stays unnamed, the same as in the episode. If you ever want to name him, ask him first.
 
 ### Sources behind the lines (all from your episode)
 - **Sympathy vs. empathy:** both come from Greek *pathos* (feeling, suffering). *Sym-* means "together" and *em-* means "into."
-- **"It's the drowning":** Olga Klimecki and Tania Singer proposed calling "compassion fatigue" *empathic distress fatigue* (Klimecki & Singer, 2012, in the book *Pathological Altruism*). In their training studies, practicing sharing others' pain raised people's negative feelings, while compassion training raised positive feelings (Klimecki et al., 2014, *Social Cognitive and Affective Neuroscience*; Singer & Klimecki, 2014, *Current Biology*).
-- **The water and the face:** Mishlei (Proverbs) 27:19, *"Kamayim hapanim lapanim, ken lev ha'adam la'adam."*
-- **The Rambam's middle path:** *Mishneh Torah*, Hilchot De'ot 1:4, and *Shemoneh Perakim*, chapter 4. Unhealthy traits as "illnesses of the soul" healed by "the wise, who are healers of souls": Hilchot De'ot 2:1.
+- **"It isn't caring that burns us out" (caption):** Olga Klimecki and Tania Singer proposed calling "compassion fatigue" *empathic distress fatigue* (Klimecki & Singer, 2012, in the book *Pathological Altruism*). In their training studies, practicing sharing others' pain raised people's negative feelings, while compassion training raised positive feelings (Klimecki et al., 2014, *Social Cognitive and Affective Neuroscience*; Singer & Klimecki, 2014, *Current Biology*).
+- **The long exhale:** a slow exhale is a simple, widely taught way to help calm the nervous system, as you say in Tool three.
+- **The Rambam's middle path (caption):** *Mishneh Torah*, Hilchot De'ot 1:4, and *Shemoneh Perakim*, chapter 4.
