@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "ask": [
+      "mcp__Gmail__send_message",
+      "mcp__Gmail__reply",
+      "mcp__Gmail__forward",
+      "mcp__Google_Drive__share_file"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*(Gmail|Google_Calendar|Google_Drive|WordPress|QuickBooks).*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guardrails.py\"",
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
+  }
+}
