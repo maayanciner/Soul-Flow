@@ -47,9 +47,9 @@ Prices are from the website. **(to confirm that they're current)**
 | Women's circles (breathe, set an intention, paint; no art experience needed) | $45 per woman, **minimum 10 women** | /womens-circles |
 | Yoga & meditation: group class / private session | $30 / $90 | /meditation-yoga |
 | Holistic nutrition coaching inspired by the Rambam (digestion, gut health, energy, mindful eating) | $100 per session | /rambam-nutrition-coaching |
-
-**Not offered right now:** cooking workshops. Don't promote them, even though the nutrition coaching page on the website still mentions them.
 | Handmade gemstone jewelry (amethyst, rose quartz, etc., "wearable reminders of your intention") | **(to confirm)** | /gemstone-jewelry |
+
+**Not offered right now:** cooking workshops (they used to be run with Yael). Don't promote them. They were removed from the nutrition coaching page on Nov 21, 2026.
 
 **Free offers (lead magnets):**
 - **Free guided meditation:** 10-minute breath meditation with music, at /meditation
