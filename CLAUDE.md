@@ -10,7 +10,7 @@ Items marked **(to confirm)** are guesses that Maayan hasn't checked yet.
 - **Business:** Soul Flow by Maayan
 - **Owner:** Maayan Ciner (runs it herself)
 - **Location:** Miami, Florida
-- **Where sessions happen:** in person, at Maayan's home studio or at clients' homes (she travels for events like paint nights and birthday parties)
+- **Where sessions happen:** in person, at Maayan's home studio or at clients' homes (she travels for events like paint nights and birthday parties). **Nutrition coaching is also offered online**, so it can reach clients outside Miami (podcast listeners anywhere).
 - **Website:** https://soulflowbymaayan.com (WordPress.com)
 - **Podcast:** *Soul Up with Maayan Ciner*, on Spotify: https://open.spotify.com/show/0hRWoqyOXnou4NZyLYs7Dm
 - **Instagram:** [@soul_flow.by.maayan](https://www.instagram.com/soul_flow.by.maayan/)
