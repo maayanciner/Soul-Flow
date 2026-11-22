@@ -29,6 +29,12 @@ Items marked **(to confirm)** are guesses that Maayan hasn't checked yet.
 
 ## 3. Offerings and prices
 
+**Top priorities to grow right now:**
+1. **Women's events:** paint nights, paint and meditate events, women's circles
+2. **Holistic nutrition coaching** (Rambam-inspired), including cooking workshops
+
+When there's a choice, point content, calls to action and ideas toward these two.
+
 Prices are from the website. **(to confirm that they're current)**
 
 | Offering | Price | Page |
@@ -79,15 +85,19 @@ Add each new episode to this table.
 
 ## 6. Brand look
 
-**Website palette:**
+**Colors: the website palette is the base, with sage and peach as accents.**
+
+Base (from the website):
 - Lavender purple `#8C7AB8` (buttons)
 - Soft gold `#B8935A` (small uppercase labels)
 - Warm brown `#4F443D` (text)
 - Cream `#FBF7F2` (main background)
 - Blush `#F6ECEE` and pale lavender `#EFE8F3` (section backgrounds)
-- Headings in **Cormorant** (elegant serif); rounded buttons and photo corners
 
-**(to confirm)** The reel scripts use **sage and peach** as brand colors, which don't match the website. Ask which palette is correct before making graphics.
+Accents:
+- Soft sage green and peach, for highlights such as key words in reel captions, drawings and small graphic details
+
+Type and shapes: headings in **Cormorant** (elegant serif); rounded buttons and photo corners.
 
 **Imagery:** warm, natural light; olive trees, calm water, grass, zen stones; earthy neutral tones; peaceful, grounding mood.
 
