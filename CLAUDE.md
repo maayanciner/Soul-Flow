@@ -58,7 +58,9 @@ Prices confirmed by Maayan in Nov 2026, except where marked **(to confirm)**.
 - **Free guided meditation:** 10-minute breath meditation with music, at /meditation
 - **Free guide:** *Live Well, Live Mindfully* (whole-food habits, the Rambam's way of eating, mindset tools), at /free-guide
 
-**Other key pages:** /book (booking), /events (upcoming events), /reviews, /about, /podcast, /journal (blog), /gallery
+**How people book:** mostly through **Instagram DMs** and **WhatsApp or text**, not the website form. So booking calls to action should invite people to DM Maayan on Instagram (e.g. "DM me CIRCLE to save your spot").
+
+**Other key pages:** /book (booking form), /events (upcoming events), /reviews, /about, /podcast, /journal (blog), /gallery
 
 ## 4. Who we serve
 
