@@ -12,7 +12,8 @@ Items marked **(to confirm)** are guesses that Maayan hasn't checked yet.
 - **Location:** Miami, Florida
 - **Website:** https://soulflowbymaayan.com (WordPress.com)
 - **Podcast:** *Soul Up with Maayan Ciner*, on Spotify: https://open.spotify.com/show/0hRWoqyOXnou4NZyLYs7Dm
-- **Where she's active:** Instagram (handle **to confirm**) and Spotify. Not on TikTok, YouTube or Facebook, so don't plan content for them.
+- **Instagram:** [@soul_flow.by.maayan](https://www.instagram.com/soul_flow.by.maayan/)
+- **Where she's active:** Instagram and Spotify. Not on TikTok, YouTube or Facebook, so don't plan content for them.
 - **Mission:** help women and children slow down, tune in and come home to themselves, through art, mindfulness, gentle movement and Rambam-inspired nutrition.
 - **Three pillars (from the site):** Wisdom (timeless teachings for body, mind and soul) · Creativity (art as a doorway to presence, self-love and confidence) · Presence (gentle practices that bring you back to breath and body)
 
