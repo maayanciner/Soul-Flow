@@ -35,7 +35,7 @@ Items marked **(to confirm)** are guesses that Maayan hasn't checked yet.
 
 When there's a choice, point content, calls to action and ideas toward these two.
 
-Prices are from the website. **(to confirm that they're current)**
+Prices confirmed by Maayan in Nov 2026, except where marked **(to confirm)**.
 
 | Offering | Price | Page |
 |---|---|---|
