@@ -31,7 +31,7 @@ Items marked **(to confirm)** are guesses that Maayan hasn't checked yet.
 
 **Top priorities to grow right now:**
 1. **Women's events:** paint nights, paint and meditate events, women's circles
-2. **Holistic nutrition coaching** (Rambam-inspired), including cooking workshops
+2. **Holistic nutrition coaching** (Rambam-inspired)
 
 When there's a choice, point content, calls to action and ideas toward these two.
 
@@ -46,7 +46,9 @@ Prices are from the website. **(to confirm that they're current)**
 | Kids birthday parties (guided painting, every guest takes a painting home) | **(to confirm)** | /birthday-parties |
 | Women's circles (breathe, set an intention, paint; no art experience needed) | $45 per woman, **minimum 10 women** | /womens-circles |
 | Yoga & meditation: group class / private session | $30 / $90 | /meditation-yoga |
-| Holistic nutrition coaching inspired by the Rambam (digestion, gut health, energy, mindful eating), plus cooking workshops | $100 per session | /rambam-nutrition-coaching |
+| Holistic nutrition coaching inspired by the Rambam (digestion, gut health, energy, mindful eating) | $100 per session | /rambam-nutrition-coaching |
+
+**Not offered right now:** cooking workshops. Don't promote them, even though the nutrition coaching page on the website still mentions them.
 | Handmade gemstone jewelry (amethyst, rose quartz, etc., "wearable reminders of your intention") | **(to confirm)** | /gemstone-jewelry |
 
 **Free offers (lead magnets):**
