@@ -42,8 +42,8 @@ Prices confirmed by Maayan in Nov 2026, except where marked **(to confirm)**.
 | One-on-one painting class (2 hrs, supplies included, no experience needed) | $120 | /private-painting-session |
 | Meditation & painting events / paint nights (birthdays, girls' nights, bridal showers, community and team events) | $45 per woman, **minimum 10 women** | /paint-and-meditate-gatherings |
 | Parent & child art workshops | $80 per pair ($40 each) | /mindful-art-for-kids |
-| Kids art classes (weekly small group) | **(to confirm)** | /kids-art-classes |
-| Kids birthday parties (guided painting, every guest takes a painting home) | **(to confirm)** | /birthday-parties |
+| Kids art classes (weekly small group) | $30 per class | /kids-art-classes |
+| Kids birthday parties (guided painting, every guest takes a painting home) | No set price yet. Don't quote one; send people to Maayan for a quote. | /birthday-parties |
 | Women's circles (breathe, set an intention, paint; no art experience needed) | $45 per woman, **minimum 10 women** | /womens-circles |
 | Yoga & meditation: group class / private session | $30 / $90 | /meditation-yoga |
 | Holistic nutrition coaching inspired by the Rambam (digestion, gut health, energy, mindful eating) | $100 per session | /rambam-nutrition-coaching |
