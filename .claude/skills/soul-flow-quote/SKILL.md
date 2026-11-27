@@ -14,6 +14,10 @@ Use `assets/soul-flow-logo-rectangle.png` (in this skill folder, also at `brand/
 - Show it with no extra border, shadow or rounded corners. It already has its own gold frame. Place it top left on a quote, about 2.3 inches wide.
 - The file is small (182 x 103 px). It looks fine on screen and phone, but can look soft in print. If she wants a print-quality version, ask her to send the original logo file.
 
+## Client logos
+
+When Maayan sends the client's logo (often a phone screenshot of their website), cut out only the logo itself: the emblem plus any wording that is part of the logo (such as text curving around a circle). Leave out page titles, paragraphs and phone status bars. Remove the white background around it (flood-fill the white from the edges so white parts inside the logo stay), save it as a PNG with a transparent background in `brand/clients/`, and place it in the "Prepared for" card. Use the organization's name as the logo shows it (for example "BJI2OC", which stands for Bringing Jewish Inspiration to Orange County). Saved so far: `brand/clients/bji2oc-logo.png`.
+
 ## Pricing (from her website, soulflowbymaayan.com/teams)
 
 - **Meditation & Painting Experience:** $45 per person. All art supplies included, and everyone takes a painting home.
@@ -32,7 +36,7 @@ Use `assets/soul-flow-logo-rectangle.png` (in this skill folder, also at `brand/
 ## What every quote includes
 
 1. The logo (above), top left. "QUOTE / EVENT PROPOSAL", the quote number (SF-YYYY-MMDD) and the issue date, top right. No "valid until" line (Maayan asked to leave it out).
-2. A "Prepared for" card (the organization, the event, the city) and a "Prepared by" card (Soul Flow by Maayan Ciner, then three lines, each label in bold: "Contact: (646) 634-0765", "Email: soulflowbymaayan@gmail.com", "Web: soulflowbymaayan.com". The label is just "Contact", never "Contact number" (too long), "WhatsApp" or "call").
+2. A "Prepared for" card (the organization, the event, the city, with the client's logo on the right of the card, about 0.95 inch wide, when she sends one) and a "Prepared by" card (Soul Flow by Maayan Ciner, then three lines, each label in bold: "Contact: (646) 634-0765", "Email: soulflowbymaayan@gmail.com", "Web: soulflowbymaayan.com". The label is just "Contact", never "Contact number" (too long), "WhatsApp" or "call").
 3. The event title: a script accent word, a Playfair Display title and the BREATHE · PAINT · CONNECT tagline. Then one or two warm lines. Match the time of day: for a daytime event write "gathering", never "evening" or "night".
 4. A deep plum info box with a gold border: date with the weekday, location, time, program length, group size, price.
 5. "What happens at the event" in three steps, plus an "Everything included" list.
