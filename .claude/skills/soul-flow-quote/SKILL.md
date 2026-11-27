@@ -44,7 +44,7 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 7. To reserve the date: deposit, final count due 10 days before, balance on the day. Payment: **Zelle or Venmo to Maayan · 646-634-0765**.
 8. What the client provides (a room with tables and chairs, 45 minutes to set up, water, an outlet), and changes and cancellation terms.
 9. The Meet Maayan bio, in a gold script heading, with exactly this text: "Maayan Ciner is an art, yoga and nutrition coach who helps people slow down through mindfulness and creativity. Guiding step-by-step painting workshops is one of her greatest passions."
-10. Signature lines. A plum bottom band on each page: page 1 reads "Soul Flow by Maayan Ciner · WhatsApp (646) 634-0765 · @soul.flow_by_maayan · soulflowbymaayan.com" (the website is always included); page 2 starts with a short thank-you line.
+10. Signature lines. A plum bottom band on each page: page 1 reads "Soul Flow by Maayan Ciner · WhatsApp (646) 634-0765 · @soul.flow_by_maayan · soulflowbymaayan.com" (the website is always included); page 2 reads "Thank you for inviting me to be part of your event · WhatsApp (646) 634-0765 · @soul.flow_by_maayan · soulflowbymaayan.com". Both bands always include the website.
 
 Call it an event for women (for example "Women's Tu B'Shvat event"), not a "celebration", unless she says otherwise. Write "every participant" / "each participant", not "every guest". Leave out guests' ages and other demographics unless she asks for them. Her voice: warm, uses "you", no exclamation marks, no hype words.
 
