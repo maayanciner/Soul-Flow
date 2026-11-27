@@ -31,7 +31,7 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 - **Travel and supplies transport fee:** a flat $250 (fair range $200 to $350). It covers the travel days, extra checked bags or shipping for supplies, and local rides.
 - **Lodging:** when she stays with family, write "No lodging charge". Never mention her family on the quote.
 - **Supplies:** ship canvases and paint by Amazon to where she is staying. Pack only the brushes and palettes.
-- **Deposit:** 50% holds the date. Book the flight only after the deposit arrives. If they cancel within 30 days, the deposit is non-refundable and the client covers the booked airfare.
+- **Deposit:** 50% holds the date. Book the flight only after the deposit arrives.
 
 ## What every quote includes
 
@@ -42,7 +42,10 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 5. "What happens at the event" in three steps, plus an "Everything included" list.
 6. A pricing table (rate and amount), then totals for the low, middle and high guest counts.
 7. To reserve the date: deposit, final count due 10 days before, balance on the day. Payment: **Zelle or Venmo to Maayan · 646-634-0765**.
-8. What the client provides (a room with tables and chairs, 45 minutes to set up, water, an outlet), and changes and cancellation terms.
+8. What the client provides (a room with tables and chairs, 45 minutes to set up, water, an outlet), and a gentle "If plans change" section. Maayan does not use non-refundable deposits or harsh cancellation terms. Keep it sweet and short, like the approved BJI2OC wording:
+   - If anything changes, such as the date or time, please let me know at least 14 days before the event so I can plan everything with care.
+   - If the event needs to be canceled, your deposit will be returned in full.
+   - If a flight delay or weather keeps me from arriving, we will choose a new date together, or your deposit will be returned in full.
 9. The Meet Maayan bio, in a gold script heading, with exactly this text: "Maayan Ciner is an art, yoga and nutrition coach who helps people slow down through mindfulness and creativity. Guiding step-by-step painting workshops is one of her greatest passions."
 10. Signature lines. A plum bottom band on each page: page 1 reads "Soul Flow by Maayan Ciner · WhatsApp (646) 634-0765 · @soul.flow_by_maayan · soulflowbymaayan.com" (the website is always included); page 2 reads "Thank you for inviting me to be part of your event · WhatsApp (646) 634-0765 · @soul.flow_by_maayan · soulflowbymaayan.com". Both bands always include the website.
 
