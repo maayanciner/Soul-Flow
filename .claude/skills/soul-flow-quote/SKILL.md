@@ -23,7 +23,7 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 - **Meditation & Painting Experience:** $45 per person. All art supplies included, and everyone takes a painting home.
 - **Group Yoga & Meditation:** $30 per person.
 - Keep $45 per person even when the painting is shorter than 2 hours, especially when she travels.
-- Minimum of 20 guests. Bill on the final guest count.
+- Minimum guests: 20 for local Miami events. **30 for out-of-town events she flies to** (so the trip is worth her time and energy). Bill on the final guest count, never below the minimum. Show totals starting at the minimum (for example 30, 35, 40 guests).
 
 ## Out-of-town travel (her approved approach, Jan 2027 Irvine event)
 
