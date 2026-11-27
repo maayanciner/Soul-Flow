@@ -56,4 +56,4 @@ Call it an event for women (for example "Women's Tu B'Shvat event"), not a "cele
 - Start from `assets/quote-example.html`, the approved BJI to OC Tu B'Shvat quote. Copy it, with `fonts-local.css`, the `f*.woff2` fonts and the logo, into a scratch folder, then edit the text.
 - Colors: plum #4F2958, gold #C9A24A / #F0C475, lavender #EFE8F3, cream #FBF7F2. Fonts: Playfair Display (headings), Nunito (body), Great Vibes (one script accent word).
 - Render: `node assets/render.js /abs/quote.html /abs/output.pdf`. It writes the PDF and a preview PNG. Check the preview: two Letter pages, nothing cut off at the bottom of page 2.
-- Check every date's weekday, every total and the phone number. Then save the PDF to `quotes/` in the repo and send it to her.
+- Check every date's weekday, every total and the phone number. Then save the PDF to `quotes/` in the repo, send it to her, and upload it as a PDF (no conversion) to her Google Drive folder **Quotes** (folder id `1jos6G4UJrAqhOhcxDqToSuH1_e4HK2CF`), named like "Soul Flow Quote - BJI2OC Tu B'Shvat - Jan 17 2027.pdf". When she asks for changes later, upload the new version to the same folder.
