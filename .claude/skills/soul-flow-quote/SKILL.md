@@ -31,7 +31,7 @@ Use `assets/soul-flow-logo-rectangle.png` (in this skill folder, also at `brand/
 
 ## What every quote includes
 
-1. The logo (above), top left. "QUOTE / EVENT PROPOSAL", the quote number (SF-YYYY-MMDD), issue date and a valid-until date 30 days later, top right.
+1. The logo (above), top left. "QUOTE / EVENT PROPOSAL", the quote number (SF-YYYY-MMDD) and the issue date, top right. No "valid until" line (Maayan asked to leave it out).
 2. A "Prepared for" card (the organization, the event, the city) and a "Prepared by" card (Soul Flow by Maayan Ciner, WhatsApp (646) 634-0765, soulflowbymaayan@gmail.com, soulflowbymaayan.com).
 3. The event title: a script accent word, a Playfair Display title and the BREATHE · PAINT · CONNECT tagline. Then one or two warm lines.
 4. A deep plum info box with a gold border: date with the weekday, location, time, program length, group size, price.
@@ -42,7 +42,7 @@ Use `assets/soul-flow-logo-rectangle.png` (in this skill folder, also at `brand/
 9. The Meet Maayan bio, in a gold script heading, with exactly this text: "Maayan Ciner is an art, yoga and nutrition coach who helps people slow down through mindfulness and creativity. Guiding step-by-step painting workshops is one of her greatest passions."
 10. Signature lines and a plum bottom band with WhatsApp and @soul.flow_by_maayan.
 
-Leave out guests' ages and other demographics unless she asks for them. Her voice: warm, uses "you", no exclamation marks, no hype words.
+Call it an event for women (for example "Women's Tu B'Shvat event"), not a "celebration", unless she says otherwise. Leave out guests' ages and other demographics unless she asks for them. Her voice: warm, uses "you", no exclamation marks, no hype words.
 
 ## How to make it
 
