@@ -46,7 +46,7 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 9. The Meet Maayan bio, in a gold script heading, with exactly this text: "Maayan Ciner is an art, yoga and nutrition coach who helps people slow down through mindfulness and creativity. Guiding step-by-step painting workshops is one of her greatest passions."
 10. Signature lines and a plum bottom band with WhatsApp and @soul.flow_by_maayan.
 
-Call it an event for women (for example "Women's Tu B'Shvat event"), not a "celebration", unless she says otherwise. Leave out guests' ages and other demographics unless she asks for them. Her voice: warm, uses "you", no exclamation marks, no hype words.
+Call it an event for women (for example "Women's Tu B'Shvat event"), not a "celebration", unless she says otherwise. Write "every participant" / "each participant", not "every guest". Leave out guests' ages and other demographics unless she asks for them. Her voice: warm, uses "you", no exclamation marks, no hype words.
 
 ## How to make it
 
