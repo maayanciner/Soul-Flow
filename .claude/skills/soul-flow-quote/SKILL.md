@@ -32,7 +32,7 @@ Use `assets/soul-flow-logo-rectangle.png` (in this skill folder, also at `brand/
 ## What every quote includes
 
 1. The logo (above), top left. "QUOTE / EVENT PROPOSAL", the quote number (SF-YYYY-MMDD) and the issue date, top right. No "valid until" line (Maayan asked to leave it out).
-2. A "Prepared for" card (the organization, the event, the city) and a "Prepared by" card (Soul Flow by Maayan Ciner, WhatsApp / call (646) 634-0765, then "Email: soulflowbymaayan@gmail.com" and "Web: soulflowbymaayan.com" on their own lines, with the labels in bold).
+2. A "Prepared for" card (the organization, the event, the city) and a "Prepared by" card (Soul Flow by Maayan Ciner, then three lines, each label in bold: "Contact number: (646) 634-0765", "Email: soulflowbymaayan@gmail.com", "Web: soulflowbymaayan.com". Write "Contact number", never "WhatsApp" or "call", here).
 3. The event title: a script accent word, a Playfair Display title and the BREATHE · PAINT · CONNECT tagline. Then one or two warm lines. Match the time of day: for a daytime event write "gathering", never "evening" or "night".
 4. A deep plum info box with a gold border: date with the weekday, location, time, program length, group size, price.
 5. "What happens at the event" in three steps, plus an "Everything included" list.
