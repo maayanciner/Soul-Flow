@@ -43,7 +43,7 @@ When Maayan sends the client's logo (often a phone screenshot of their website),
 6. A pricing table (rate and amount), then totals for the low, middle and high guest counts.
 7. To reserve the date: deposit, final count due 10 days before, balance on the day. Payment: **Zelle or Venmo to Maayan · 646-634-0765**.
 8. What the client provides (a room with tables and chairs, 45 minutes to set up, water, an outlet), and a gentle "If plans change" section. Maayan does not use non-refundable deposits or harsh cancellation terms. Keep it sweet and short, like the approved BJI2OC wording:
-   - If anything changes, such as the date or time, please let me know at least 14 days before the event so I can plan everything with care.
+   - If anything changes, such as the date or time, please let us know at least 14 days before the event so we can plan everything with care.
    - If the event needs to be canceled, your deposit will be returned in full.
    - If a flight delay or weather keeps me from arriving, we will choose a new date together, or your deposit will be returned in full.
 9. The Meet Maayan section: a tiny round photo of her on the left (`assets/headshot.jpg`, her official headshot on the green sofa, about 0.85 inch, gold rim #C9A24A with a thin white gap, centered on her face), then a thin gold vertical line, then the bio, in a gold script heading, with exactly this text: "Maayan Ciner is an art, yoga and nutrition coach who helps people slow down through mindfulness and creativity. Guiding step-by-step painting workshops is one of her greatest passions."
