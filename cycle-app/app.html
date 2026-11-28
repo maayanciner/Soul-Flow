@@ -150,12 +150,6 @@ button.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink
 .formgrid label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink-2)}
 footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
 .flag{font-size:11.5px;font-weight:700;color:var(--warn)}
-.facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.fun{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.fun.hl{border-color:color-mix(in srgb,var(--ovu) 55%,var(--line));background:color-mix(in srgb,var(--ovu) 8%,var(--surface))}
-.fun .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
-.fun h3{font-size:17px}
-.fun .big{font-family:var(--display);font-size:30px;line-height:1}
 .lore{background:var(--surface-2);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
 .lore p.q{font-family:var(--display);font-size:clamp(18px,2.4vw,22px);line-height:1.35;max-width:62ch}
 .install{gap:10px;padding-block:14px}
@@ -238,18 +232,12 @@ footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
     </div>
   </section>
 
-  <!-- FUN FACTS -->
-  <section class="card" aria-labelledby="funH">
-    <div class="sec-head"><div><span class="eyebrow">Did you know?</span><h2 id="funH">Fun facts from your cycle</h2></div></div>
-    <div class="facts-grid" id="dataFacts"></div>
+  <!-- DAILY ASTROLOGY NOTE -->
+  <section class="card" aria-labelledby="noteH">
     <div class="lore">
-      <div class="row" style="justify-content:space-between">
-        <span class="eyebrow">Cycle lore · <span id="loreTag"></span></span>
-        <button class="btn" id="loreNext">Another fact</button>
-      </div>
-      <p class="q" id="loreText"></p>
-      <p class="note" id="loreSrc"></p>
-      <div class="chips" id="loreFilter" role="group" aria-label="Fact topics"></div>
+      <span class="eyebrow">Astrology 101 · your note for <span id="noteDate"></span></span>
+      <h2 id="noteH"></h2>
+      <p class="q" id="noteText"></p>
     </div>
   </section>
 
@@ -922,115 +910,49 @@ let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$(
 
 
 
-/* ---------- fun facts ---------- */
-const LORE=[
-['Moon','The word "menstruation" comes from the Latin mensis, month, which shares its root with the Greek mēnē, moon. Language has tied periods to the moon for thousands of years.',''],
-['Moon','A lunar cycle lasts 29.5 days. A study of over 600,000 tracked cycles found the average menstrual cycle is about 29.3 days. Almost a perfect match.','Bull et al., npj Digital Medicine, 2019'],
-['Moon','A 2021 study that followed women for up to 32 years found their cycles sometimes fell into step with the moon, more often before age 35 and less often under heavy artificial light.','Helfrich-Förster et al., Science Advances, 2021'],
-['Moon','"Lunaception" was a 1970s idea from Louise Lacey: sleep in total darkness except for a soft light on the nights around the full moon, to nudge ovulation toward the full moon.',''],
-['Astrology','In astrology the Moon rules Cancer, the sign traditionally linked with the breasts, the womb and nurturing. Breast tenderness is one of the most common PMS signs.',''],
-['Astrology','Medieval astrologers mapped the body onto the zodiac (melothesia). Scorpio rules the reproductive organs and Libra the kidneys and lower back, where many people feel period aches.',''],
-['Astrology','In the 1950s, Czech doctor Eugen Jonas claimed a woman has a second fertile time each month: when the Sun and Moon return to the angle they formed at her birth. It was never scientifically confirmed but is still popular in astrology.',''],
-['Astrology','The Moon moves through all twelve signs in about 27.3 days, so in one menstrual cycle the moon visits every sign of your chart.',''],
-['PMS','PMS first appeared in medical writing in 1931, when Dr. Robert Frank described "premenstrual tension". The term "premenstrual syndrome" came later, in 1953, from Katharina Dalton and Raymond Greene.',''],
-['PMS','Up to 3 in 4 menstruating people notice some PMS symptoms. The cause is not low hormones but how sensitive the brain is to the normal rise and fall of estrogen and progesterone.','ACOG'],
-['PMS','In a large trial, 1,200 mg of calcium a day cut PMS symptoms almost in half compared with placebo. Leafy greens, sesame, almonds and yogurt are rich sources.','Thys-Jacobs et al., 1998'],
-['PMS','Saffron, the world\'s most precious spice, has been tested for PMS: in a small trial it eased low mood and irritability better than placebo.','Agha-Hosseini et al., 2008'],
-['PMS','Chocolate cravings peak before a period. One popular theory points to magnesium, which dips in the luteal phase, and dark chocolate is full of it.',''],
-['PMS','Your metabolism speeds up slightly in the luteal phase, so feeling hungrier before your period is your body asking for real fuel, not a lack of willpower.',''],
-['Fertility','An egg lives only 12–24 hours after ovulation, but sperm can survive up to 5 days. That is why the fertile window is about 6 days long.',''],
-['Fertility','Progesterone raises your resting body temperature by about 0.3–0.5 °C after ovulation. Tracking it each morning shows when ovulation has already happened.',''],
-['Fertility','Around ovulation, cervical fluid turns clear and stretchy like raw egg white. It helps sperm swim toward the egg.',''],
-['Fertility','Some studies suggest the sense of smell sharpens and the voice rises slightly in pitch around ovulation.',''],
-['Fertility','Ovulation pain has its own name, mittelschmerz, German for "middle pain". Roughly 1 in 5 people feel it.',''],
-['Herbalism','Chaste tree (vitex) was nicknamed "monk\'s pepper" because medieval monks chewed the berries to calm their libido. Today it is the best-studied herb for PMS.',''],
-['Herbalism','In a 2009 study, ginger capsules eased period pain as well as ibuprofen and mefenamic acid.','Ozgoli et al., 2009'],
-['Herbalism','Mugwort (Artemisia) is named after Artemis, Greek goddess of the moon and of women. It has long been used to bring on a period, so it must be avoided in pregnancy.',''],
-['Herbalism','Yarrow\'s Latin name, Achillea, honors Achilles, who legend says used it to stop his soldiers\' bleeding. Herbalists later used it for heavy periods.',''],
-['Herbalism','Midwives have recommended red raspberry leaf tea for centuries as a tonic for the uterus.',''],
-['Herbalism','In a study of teenage girls, drinking rose tea eased period pain and anxiety. Rose is also a classic Persian and Chinese remedy for the heart.','Tseng et al., 2005'],
-['Chinese medicine','The Huangdi Neijing, written over 2,000 years ago, describes a woman\'s life in 7-year cycles: Tian Gui ("heavenly water") arrives at 14 and periods begin, and it fades at 49.',''],
-['Chinese medicine','Dong quai is called "female ginseng" and has been the most used herb for women in Chinese medicine for more than a thousand years.',''],
-['Chinese medicine','In TCM the Liver stores the Blood and is most active from 1 to 3 am. Being asleep then is said to help Blood rebuild and keep PMS calm.',''],
-['Chinese medicine','Brown sugar and ginger tea (红糖姜茶) is the period remedy almost every Chinese grandmother knows.',''],
-['Chinese medicine','Mugwort is also the herb burned in moxibustion, a heat therapy often used on point SP6 to warm the womb and ease cramps.',''],
-['Ancient wisdom','Ayurveda prescribes "Rajaswala paricharya", a regimen of rest, simple warm food and quiet for the first three days of bleeding.',''],
-['Ancient wisdom','Many ancient cultures kept "red tents" or moon lodges where women rested together during their periods.',''],
-['Ancient wisdom','A typical period loses only about 30–40 ml of blood, around 2–3 tablespoons, even though it feels like much more.','']
+/* ---------- daily astrology note ---------- */
+const NOTES=[
+['What astrology is','Astrology is an ancient practice that reads the positions of the Sun, Moon and planets as a mirror of life on Earth. Of all the sky\'s bodies, the Moon is the one most tied to your menstrual cycle.'],
+['The Moon in astrology','In astrology the Moon stands for your body, emotions, instincts and natural rhythms. Ancient astrologers called it the ruler of women\'s monthly cycles.'],
+['The 12 zodiac signs','The zodiac is the sky divided into 12 equal slices, the signs. The Sun takes a whole year to pass through all 12, but the Moon does it in about 27 days, so during one menstrual cycle the Moon visits every sign.'],
+['Your sun sign','Your sun sign is the sign the Sun was in on your birthday. It is the "horoscope sign" most people know, and it describes your core identity and vitality.'],
+['Your moon sign','Your moon sign is the sign the Moon was in when you were born. Astrologers say it describes your emotional needs and how you experience your body, including how you go through PMS.'],
+['The four elements','Every sign belongs to an element. Fire: Aries, Leo, Sagittarius. Earth: Taurus, Virgo, Capricorn. Air: Gemini, Libra, Aquarius. Water: Cancer, Scorpio, Pisces.'],
+['Water signs and your body','When the Moon passes through a water sign (Cancer, Scorpio, Pisces), astrologers say feelings run deeper. Some people notice more tears or water retention on these days, especially before their period.'],
+['Fire and earth days','When the Moon is in a fire sign, energy and heat rise, so move your body and release it. When it is in an earth sign, comfort and routine feel good: warm food, slow walks, early nights.'],
+['Air days','When the Moon is in an air sign (Gemini, Libra, Aquarius), the mind gets busy. On PMS days this can mean overthinking, so journaling and breathwork help.'],
+['The moon\'s phases','The Moon goes from new to full in about 15 days and back again in another 15: 29.5 days in total, almost the same as the average menstrual cycle.'],
+['The new moon','At the new moon the Sun and Moon sit together in the same sign and the sky is dark. Astrologers see it as a time of rest and new beginnings, the same feeling as the first days of a period.'],
+['The full moon','At the full moon the Sun and Moon are exactly opposite each other. Astrology reads it as a peak, a moment of culmination, which is why it is often compared to ovulation.'],
+['Waxing and waning','The waxing moon (light growing) matches your follicular phase: building and starting. The waning moon (light shrinking) matches your luteal phase: finishing, releasing and turning inward.'],
+['The moon changes signs','The Moon changes sign about every two and a half days. The app shows "Moon in…" so you can notice how each sign\'s mood feels in your body.'],
+['Signs and body parts','Ancient astrologers assigned each sign a part of the body. Scorpio rules the reproductive organs, Libra the lower back and kidneys, Cancer the breasts and stomach, and Virgo the digestion.'],
+['The Moon\'s home sign','Each planet has a "home" sign it rules. The Moon\'s home is Cancer, the sign of nurturing, home and mothering. When the Moon is in Cancer, astrologers say sensitivity peaks, so it is a good day for self-care.'],
+['Venus and the female symbol','The ♀ symbol biology uses for "female" is the astrological glyph of Venus, the planet of love, beauty, pleasure and fertility. In traditional astrology Venus rules the female reproductive system.'],
+['Mars and blood','Mars ♂ is the planet of energy, heat and action. Traditional astrology links it with blood, inflammation and fevers, and some astrologers watch Mars when cramps feel fiery.'],
+['Retrogrades','A planet is "retrograde" when, seen from Earth, it seems to move backward. Mercury does this about three times a year and is blamed for mix-ups; Venus does it every 18 months, a time astrologers say is for rethinking love and self-worth.'],
+['Ruling planets','Every sign has a ruling planet. Scorpio, the sign of the womb, is ruled by Mars and, in modern astrology, by Pluto, the planet of death and rebirth, a theme that echoes the monthly shedding and renewal of the uterus.'],
+['Saturn and cycles','Saturn is the planet of time, structure and cycles. It takes about 29.5 years to circle the Sun, and astrologers call its return around age 29 the "Saturn return", a big life checkpoint. It is curious that this echoes the Moon\'s 29.5 days.'],
+['The birth chart','A birth chart is a map of where the Sun, Moon and every planet were at the exact moment and place you were born. To make one you need your birth date, time and city.'],
+['The houses','A birth chart is divided into 12 houses, each an area of life. The 5th house is creativity, pleasure and children; the 6th is health and daily routines; the 8th is intimacy and transformation.'],
+['The void-of-course moon','Before the Moon enters a new sign, there is often a gap astrologers call "void of course". They advise resting rather than starting things then, much like the slower energy of the first days of a period.'],
+['Eclipses','Eclipses happen at some new and full moons, when the Sun, Moon and Earth line up exactly. There are 4 to 7 each year, and astrologers treat them as turning points.'],
+['Your lunar return','Every 27.3 days the Moon returns to the exact spot it held when you were born. Astrologers call this your lunar return, a personal emotional reset each month.'],
+['Aspects','Aspects are the angles between planets. A conjunction (0°) blends their energies, an opposition (180°) creates a pull between them, a square (90°) brings tension and a trine (120°) brings ease. The new moon is a Sun–Moon conjunction; the full moon is their opposition.'],
+['Where the zodiac began','The Babylonians divided the sky into 12 signs about 2,500 years ago. The Greek word zodiakos means "circle of little animals".'],
+['The Moon as mother','In astrology the Moon also represents your mother, your home and the way you nurture yourself. Caring for your body during your period is a very "lunar" act.'],
+['Vedic astrology','India\'s Vedic astrology (Jyotish) uses a zodiac shifted about 24° from the Western one, so many people\'s Vedic sun sign is the sign before their Western one. There the Moon, Chandra, rules the mind.'],
+['Lunar mansions','Vedic astrology splits the Moon\'s path into 27 "lunar mansions" (nakshatras), and Chinese astrology into 28 (xiu): roughly one for each day of the Moon\'s monthly trip through the sky.'],
+['The Moon\'s strongest sign','Astrologers say the Moon is "exalted", at its most comfortable, in Taurus, the sign of the senses and the body. In Scorpio it is said to feel things most intensely.'],
+['Monday is Moon-day','The days of the week are named after planets. Monday is the Moon\'s day, which is clearer in Spanish (lunes) and Italian (lunedì).'],
+['Jupiter and abundance','Jupiter is the planet of growth, luck and abundance, called the "great benefic". In traditional astrology Jupiter in the 5th house of a chart was a classic sign of fertility and children.']
 ];
-const LORE_TAGS=['All','PMS','Moon','Astrology','Fertility','Herbalism','Chinese medicine','Ancient wisdom'];
-UI.loreTag='All';UI.loreOff=0;
-function renderLore(){
-  const list=UI.loreTag==='All'?LORE:LORE.filter(l=>l[0]===UI.loreTag);
-  const f=info(TODAY);
-  let base=dayIndex(TODAY);
-  if(UI.loreTag==='All'&&f&&f.pms&&UI.loreOff===0){const i=LORE.findIndex((l,j)=>l[0]==='PMS'&&j%5===base%5);if(i>=0)base=i}
-  const l=list[((base+UI.loreOff)%list.length+list.length)%list.length];
-  $('loreTag').textContent=l[0];$('loreText').textContent=l[1];$('loreSrc').textContent=l[2]?'Source: '+l[2]:'';
-  $('loreFilter').innerHTML=LORE_TAGS.map(t=>`<button class="chip" aria-pressed="${t===UI.loreTag}" data-lt="${t}">${t}</button>`).join('');
-}
-$('loreNext').onclick=()=>{UI.loreOff++;renderLore()};
-$('loreFilter').onclick=e=>{const b=e.target.closest('button[data-lt]');if(!b)return;UI.loreTag=b.dataset.lt;UI.loreOff=0;renderLore()};
-
-function fertileDates(i){
-  const p=PER[i],nx=PER[i+1];let L;
-  if(nx){L=diff(p.sd,nx.sd);if(L>45||p.gap)return null}else L=PRED.L;
-  const O=L-14;return{L,O,fs:add(p.sd,O-6),fe:add(p.sd,O),ov:add(p.sd,O-1)};
-}
-function eventsIn(a,b){const r=[];for(let d=new Date(a);d<=b;d=add(d,1)){const e=moonEvents(d);if(e)r.push({d:new Date(d),e})}return r}
-function nearEvent(d,k){for(let x=-1;x<=1;x++){if(moonEvents(add(d,x))===k)return true}return false}
-function timeBucket(t){
-  if(!t)return null;t=t.toLowerCase();if(t.includes('morning'))return'Morning';if(t.includes('night'))return'Night';
-  const m=t.match(/(\d{1,2})(?::(\d\d))?\s*(am|pm)?/);if(!m||!m[3])return null;
-  let h=+m[1]%12+(m[3]==='pm'?12:0);return h>=5&&h<12?'Morning':h<17?'Afternoon':h<21?'Evening':'Night';
-}
-function renderFacts(){
-  const out=[];
-  // 1. recent fertile windows that held a full or new moon
-  for(let i=PER.length-1;i>=Math.max(0,PER.length-3)&&out.length<2;i--){
-    const fd=fertileDates(i);if(!fd)continue;
-    eventsIn(fd.fs,fd.fe).forEach(ev=>{
-      const onOv=F(ev.d)===F(fd.ov),full=ev.e==='full';
-      out.push({hl:true,tag:'Moon × fertility',title:`${full?'Full':'New'} moon in your fertile window`,
-        text:`On ${nice(ev.d)} the ${full?'full':'new'} moon ${full?'rose':'arrived'} ${onOv?'on your estimated ovulation day':'inside your estimated fertile window'} (${short(fd.fs)}–${short(fd.fe)}). ${full?'Peak fertility under peak moonlight is the classic White Moon alignment of moon lore.':'Ovulating with the dark moon is the Red Moon rhythm, linked in lore with inward, creative energy.'}`});
-    });
-  }
-  // 2. how often the full moon has landed in a fertile window
-  let tot=0,hit=0;for(let i=0;i<PER.length-1;i++){const fd=fertileDates(i);if(!fd)continue;tot++;if(eventsIn(fd.fs,fd.fe).some(e=>e.e==='full'))hit++}
-  if(tot)out.push({tag:'Moon × fertility',big:`${hit} of ${tot}`,title:'Full moons during fertile days',text:`Since ${MO[PER[0].sd.getMonth()]} ${PER[0].sd.getFullYear()}, a full moon fell inside your fertile window in ${hit} cycles (${Math.round(hit/tot*100)}%). By pure chance you would expect about 24%.`});
-  // 3. periods that began on a full or new moon
-  const onFull=PER.filter(p=>nearEvent(p.sd,'full')),onNew=PER.filter(p=>nearEvent(p.sd,'new'));
-  out.push({tag:'Moon',big:`${onFull.length+onNew.length}`,title:'Periods that began with the moon',text:`${onNew.length} of your periods started within a day of a new moon and ${onFull.length} within a day of a full moon.${onFull.length?' The latest full-moon start was '+short(onFull[onFull.length-1].sd,true)+'.':''}`});
-  // 4. most common moon phase and moon sign at period start
-  const pc={},sc={};PER.forEach(p=>{const n=moonPhase(p.sd).name;pc[n]=(pc[n]||0)+1;const g=sign(moonLon(p.sd))[0];sc[g]=(sc[g]||0)+1});
-  const tp=Object.entries(pc).sort((a,b)=>b[1]-a[1])[0],ts=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0],tsg=SIGNS.find(x=>x[0]===ts[0]);
-  out.push({tag:'Astrology',title:`Your period's favorite moon: ${tp[0]}`,text:`${tp[1]} of your ${PER.length} periods began under a ${tp[0].toLowerCase()}. The moon was most often in ${ts[0]} ${tsg[1]} (${ts[1]} times), the sign said to rule the ${tsg[3].toLowerCase()}.`});
-  // 5. consistency streak and exact 28s
-  let best=0,cur=0,bestEnd=null;CYC.forEach(c=>{if(c.valid&&Math.abs(c.len-28)<=2){cur++;if(cur>best){best=cur;bestEnd=c.start}}else cur=0});
-  const ex=CYC.filter(c=>c.valid&&c.len===28).length;
-  out.push({tag:'Your rhythm',big:`${best}`,title:'Cycles in a row within 2 days of 28',text:`That is your longest regular streak, ending with the cycle that began ${short(bestEnd,true)}. ${ex} of your cycles were exactly 28 days, a perfect moon-month.`});
-  // 6. shortest and longest
-  const vc=CYC.filter(c=>c.valid);if(vc.length){const mn=vc.reduce((a,b)=>b.len<a.len?b:a),mx=vc.reduce((a,b)=>b.len>a.len?b:a);
-  out.push({tag:'Your rhythm',title:`From ${mn.len} to ${mx.len} days`,text:`Your shortest regular cycle began ${short(mn.start,true)} (${mn.len} days) and your longest began ${short(mx.start,true)} (${mx.len} days).`})}
-  // 7. double-period months
-  const mc={};PER.forEach(p=>{const k=MOL[p.sd.getMonth()]+' '+p.sd.getFullYear();mc[k]=(mc[k]||0)+1});
-  const dbl=Object.keys(mc).filter(k=>mc[k]>1);
-  if(dbl.length)out.push({tag:'Your rhythm',title:`${dbl.length} "blue moon" months`,text:`Like a blue moon (two full moons in one month), you had two periods in the same calendar month in ${dbl.join(', ')}. With cycles shorter than 31 days this happens about once a year.`});
-  // 8. weekday and time of day
-  const WDL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const wc={};PER.forEach(p=>{const w=WDL[p.sd.getDay()];wc[w]=(wc[w]||0)+1});const tw=Object.entries(wc).sort((a,b)=>b[1]-a[1])[0];
-  const tc={};PER.forEach(p=>{const b=timeBucket(p.st);if(b)tc[b]=(tc[b]||0)+1});const tt2=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0];
-  out.push({tag:'Your rhythm',title:`Your period loves ${tw[0]}s`,text:`${tw[1]} periods started on a ${tw[0]}.${tt2?` And the most common start time was the ${tt2[0].toLowerCase()} (${tt2[1]} of ${Object.values(tc).reduce((a,b)=>a+b,0)} with a recorded time).`:''}`});
-  // 9. seasons
-  const sz={w:[],s:[]};vc.forEach(c=>{const m=c.start.getMonth();if(m===11||m<2)sz.w.push(c.len);else if(m>=5&&m<=7)sz.s.push(c.len)});
-  if(sz.w.length&&sz.s.length){const w=mean(sz.w),su=mean(sz.s);out.push({tag:'Chinese medicine',title:`Winter ${w.toFixed(1)} vs summer ${su.toFixed(1)} days`,text:`Your cycles that start in winter average ${w.toFixed(1)} days and summer ones ${su.toFixed(1)}. TCM teaches that winter is Kidney season, when the body conserves, and summer is Heart season, when energy moves outward.`})}
-  // 10. lifetime bleeding
-  const bd=PER.reduce((a,p)=>a+(p.plen&&p.plen<=12?p.plen:0),0),span=diff(PER[0].sd,TODAY)+1;
-  out.push({tag:'Your body',big:`${bd} days`,title:'Of bleeding recorded',text:`That is about ${Math.round(bd/span*100)}% of the days since ${short(PER[0].sd,true)}: across ${PER.length} periods, roughly ${(PER.length*0.035).toFixed(1)} liters of blood (about 35 ml a period) that your body built, released and renewed.`});
-  $('dataFacts').innerHTML=out.slice(0,12).map(f=>`<div class="fun${f.hl?' hl':''}"><span class="tag">${f.tag}</span>${f.big?`<span class="big num">${f.big}</span>`:''}<h3>${f.title}</h3><p class="muted">${f.text}</p></div>`).join('');
-  renderLore();
+function renderNote(){
+  const n=NOTES[((dayIndex(TODAY)%NOTES.length)+NOTES.length)%NOTES.length];
+  $('noteDate').textContent=nice(TODAY);$('noteH').textContent=n[0];$('noteText').textContent=n[1];
 }
 
-function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderToday();renderFacts();renderGuide();renderCal();renderDiary()}
+function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderToday();renderNote();renderGuide();renderCal();renderDiary()}
 setSeg('metricSeg','m',UI.metric);setSeg('rangeSeg','r',UI.range);
 rebuild();
 if(pref('trends')==='0'){tt.setAttribute('aria-expanded','false');$('trends').hidden=true}
