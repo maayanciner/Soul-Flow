@@ -151,6 +151,14 @@ button.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink
 .formgrid label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink-2)}
 footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
 .flag{font-size:11.5px;font-weight:700;color:var(--warn)}
+.facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.fun{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.fun.hl{border-color:color-mix(in srgb,var(--ovu) 55%,var(--line));background:color-mix(in srgb,var(--ovu) 8%,var(--surface))}
+.fun .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.fun h3{font-size:17px}
+.fun .big{font-family:var(--display);font-size:30px;line-height:1}
+.lore{background:var(--surface-2);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.lore p.q{font-family:var(--display);font-size:clamp(18px,2.4vw,22px);line-height:1.35;max-width:62ch}
 .install{gap:10px;padding-block:14px}
 .install summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .install ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
@@ -229,6 +237,21 @@ footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
         <div id="todayBanner"></div>
         <div class="facts" id="facts"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- FUN FACTS -->
+  <section class="card" aria-labelledby="funH">
+    <div class="sec-head"><div><span class="eyebrow">Did you know?</span><h2 id="funH">Fun facts from your cycle</h2></div></div>
+    <div class="facts-grid" id="dataFacts"></div>
+    <div class="lore">
+      <div class="row" style="justify-content:space-between">
+        <span class="eyebrow">Cycle lore · <span id="loreTag"></span></span>
+        <button class="btn" id="loreNext">Another fact</button>
+      </div>
+      <p class="q" id="loreText"></p>
+      <p class="note" id="loreSrc"></p>
+      <div class="chips" id="loreFilter" role="group" aria-label="Fact topics"></div>
     </div>
   </section>
 
@@ -899,7 +922,117 @@ $('cNext').onclick=()=>{UI.calM=addM(UI.calM,1);renderCal()};
 $('cToday').onclick=()=>{UI.calM=new Date(TODAY.getFullYear(),TODAY.getMonth(),1,12);UI.view=TODAY;renderCal();renderGuide()};
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$('trends').hidden)renderChart()},150)});
 
-function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderToday();renderGuide();renderCal();renderDiary()}
+
+
+/* ---------- fun facts ---------- */
+const LORE=[
+['Moon','The word "menstruation" comes from the Latin mensis, month, which shares its root with the Greek mēnē, moon. Language has tied periods to the moon for thousands of years.',''],
+['Moon','A lunar cycle lasts 29.5 days. A study of over 600,000 tracked cycles found the average menstrual cycle is about 29.3 days. Almost a perfect match.','Bull et al., npj Digital Medicine, 2019'],
+['Moon','A 2021 study that followed women for up to 32 years found their cycles sometimes fell into step with the moon, more often before age 35 and less often under heavy artificial light.','Helfrich-Förster et al., Science Advances, 2021'],
+['Moon','"Lunaception" was a 1970s idea from Louise Lacey: sleep in total darkness except for a soft light on the nights around the full moon, to nudge ovulation toward the full moon.',''],
+['Astrology','In astrology the Moon rules Cancer, the sign traditionally linked with the breasts, the womb and nurturing. Breast tenderness is one of the most common PMS signs.',''],
+['Astrology','Medieval astrologers mapped the body onto the zodiac (melothesia). Scorpio rules the reproductive organs and Libra the kidneys and lower back, where many people feel period aches.',''],
+['Astrology','In the 1950s, Czech doctor Eugen Jonas claimed a woman has a second fertile time each month: when the Sun and Moon return to the angle they formed at her birth. It was never scientifically confirmed but is still popular in astrology.',''],
+['Astrology','The Moon moves through all twelve signs in about 27.3 days, so in one menstrual cycle the moon visits every sign of your chart.',''],
+['PMS','PMS first appeared in medical writing in 1931, when Dr. Robert Frank described "premenstrual tension". The term "premenstrual syndrome" came later, in 1953, from Katharina Dalton and Raymond Greene.',''],
+['PMS','Up to 3 in 4 menstruating people notice some PMS symptoms. The cause is not low hormones but how sensitive the brain is to the normal rise and fall of estrogen and progesterone.','ACOG'],
+['PMS','In a large trial, 1,200 mg of calcium a day cut PMS symptoms almost in half compared with placebo. Leafy greens, sesame, almonds and yogurt are rich sources.','Thys-Jacobs et al., 1998'],
+['PMS','Saffron, the world\'s most precious spice, has been tested for PMS: in a small trial it eased low mood and irritability better than placebo.','Agha-Hosseini et al., 2008'],
+['PMS','Chocolate cravings peak before a period. One popular theory points to magnesium, which dips in the luteal phase, and dark chocolate is full of it.',''],
+['PMS','Your metabolism speeds up slightly in the luteal phase, so feeling hungrier before your period is your body asking for real fuel, not a lack of willpower.',''],
+['Fertility','An egg lives only 12–24 hours after ovulation, but sperm can survive up to 5 days. That is why the fertile window is about 6 days long.',''],
+['Fertility','Progesterone raises your resting body temperature by about 0.3–0.5 °C after ovulation. Tracking it each morning shows when ovulation has already happened.',''],
+['Fertility','Around ovulation, cervical fluid turns clear and stretchy like raw egg white. It helps sperm swim toward the egg.',''],
+['Fertility','Some studies suggest the sense of smell sharpens and the voice rises slightly in pitch around ovulation.',''],
+['Fertility','Ovulation pain has its own name, mittelschmerz, German for "middle pain". Roughly 1 in 5 people feel it.',''],
+['Herbalism','Chaste tree (vitex) was nicknamed "monk\'s pepper" because medieval monks chewed the berries to calm their libido. Today it is the best-studied herb for PMS.',''],
+['Herbalism','In a 2009 study, ginger capsules eased period pain as well as ibuprofen and mefenamic acid.','Ozgoli et al., 2009'],
+['Herbalism','Mugwort (Artemisia) is named after Artemis, Greek goddess of the moon and of women. It has long been used to bring on a period, so it must be avoided in pregnancy.',''],
+['Herbalism','Yarrow\'s Latin name, Achillea, honors Achilles, who legend says used it to stop his soldiers\' bleeding. Herbalists later used it for heavy periods.',''],
+['Herbalism','Midwives have recommended red raspberry leaf tea for centuries as a tonic for the uterus.',''],
+['Herbalism','In a study of teenage girls, drinking rose tea eased period pain and anxiety. Rose is also a classic Persian and Chinese remedy for the heart.','Tseng et al., 2005'],
+['Chinese medicine','The Huangdi Neijing, written over 2,000 years ago, describes a woman\'s life in 7-year cycles: Tian Gui ("heavenly water") arrives at 14 and periods begin, and it fades at 49.',''],
+['Chinese medicine','Dong quai is called "female ginseng" and has been the most used herb for women in Chinese medicine for more than a thousand years.',''],
+['Chinese medicine','In TCM the Liver stores the Blood and is most active from 1 to 3 am. Being asleep then is said to help Blood rebuild and keep PMS calm.',''],
+['Chinese medicine','Brown sugar and ginger tea (红糖姜茶) is the period remedy almost every Chinese grandmother knows.',''],
+['Chinese medicine','Mugwort is also the herb burned in moxibustion, a heat therapy often used on point SP6 to warm the womb and ease cramps.',''],
+['Ancient wisdom','Ayurveda prescribes "Rajaswala paricharya", a regimen of rest, simple warm food and quiet for the first three days of bleeding.',''],
+['Ancient wisdom','Many ancient cultures kept "red tents" or moon lodges where women rested together during their periods.',''],
+['Ancient wisdom','A typical period loses only about 30–40 ml of blood, around 2–3 tablespoons, even though it feels like much more.','']
+];
+const LORE_TAGS=['All','PMS','Moon','Astrology','Fertility','Herbalism','Chinese medicine','Ancient wisdom'];
+UI.loreTag='All';UI.loreOff=0;
+function renderLore(){
+  const list=UI.loreTag==='All'?LORE:LORE.filter(l=>l[0]===UI.loreTag);
+  const f=info(TODAY);
+  let base=dayIndex(TODAY);
+  if(UI.loreTag==='All'&&f&&f.pms&&UI.loreOff===0){const i=LORE.findIndex((l,j)=>l[0]==='PMS'&&j%5===base%5);if(i>=0)base=i}
+  const l=list[((base+UI.loreOff)%list.length+list.length)%list.length];
+  $('loreTag').textContent=l[0];$('loreText').textContent=l[1];$('loreSrc').textContent=l[2]?'Source: '+l[2]:'';
+  $('loreFilter').innerHTML=LORE_TAGS.map(t=>`<button class="chip" aria-pressed="${t===UI.loreTag}" data-lt="${t}">${t}</button>`).join('');
+}
+$('loreNext').onclick=()=>{UI.loreOff++;renderLore()};
+$('loreFilter').onclick=e=>{const b=e.target.closest('button[data-lt]');if(!b)return;UI.loreTag=b.dataset.lt;UI.loreOff=0;renderLore()};
+
+function fertileDates(i){
+  const p=PER[i],nx=PER[i+1];let L;
+  if(nx){L=diff(p.sd,nx.sd);if(L>45||p.gap)return null}else L=PRED.L;
+  const O=L-14;return{L,O,fs:add(p.sd,O-6),fe:add(p.sd,O),ov:add(p.sd,O-1)};
+}
+function eventsIn(a,b){const r=[];for(let d=new Date(a);d<=b;d=add(d,1)){const e=moonEvents(d);if(e)r.push({d:new Date(d),e})}return r}
+function nearEvent(d,k){for(let x=-1;x<=1;x++){if(moonEvents(add(d,x))===k)return true}return false}
+function timeBucket(t){
+  if(!t)return null;t=t.toLowerCase();if(t.includes('morning'))return'Morning';if(t.includes('night'))return'Night';
+  const m=t.match(/(\d{1,2})(?::(\d\d))?\s*(am|pm)?/);if(!m||!m[3])return null;
+  let h=+m[1]%12+(m[3]==='pm'?12:0);return h>=5&&h<12?'Morning':h<17?'Afternoon':h<21?'Evening':'Night';
+}
+function renderFacts(){
+  const out=[];
+  // 1. recent fertile windows that held a full or new moon
+  for(let i=PER.length-1;i>=Math.max(0,PER.length-3)&&out.length<2;i--){
+    const fd=fertileDates(i);if(!fd)continue;
+    eventsIn(fd.fs,fd.fe).forEach(ev=>{
+      const onOv=F(ev.d)===F(fd.ov),full=ev.e==='full';
+      out.push({hl:true,tag:'Moon × fertility',title:`${full?'Full':'New'} moon in your fertile window`,
+        text:`On ${nice(ev.d)} the ${full?'full':'new'} moon ${full?'rose':'arrived'} ${onOv?'on your estimated ovulation day':'inside your estimated fertile window'} (${short(fd.fs)}–${short(fd.fe)}). ${full?'Peak fertility under peak moonlight is the classic White Moon alignment of moon lore.':'Ovulating with the dark moon is the Red Moon rhythm, linked in lore with inward, creative energy.'}`});
+    });
+  }
+  // 2. how often the full moon has landed in a fertile window
+  let tot=0,hit=0;for(let i=0;i<PER.length-1;i++){const fd=fertileDates(i);if(!fd)continue;tot++;if(eventsIn(fd.fs,fd.fe).some(e=>e.e==='full'))hit++}
+  if(tot)out.push({tag:'Moon × fertility',big:`${hit} of ${tot}`,title:'Full moons during fertile days',text:`Since ${MO[PER[0].sd.getMonth()]} ${PER[0].sd.getFullYear()}, a full moon fell inside your fertile window in ${hit} cycles (${Math.round(hit/tot*100)}%). By pure chance you would expect about 24%.`});
+  // 3. periods that began on a full or new moon
+  const onFull=PER.filter(p=>nearEvent(p.sd,'full')),onNew=PER.filter(p=>nearEvent(p.sd,'new'));
+  out.push({tag:'Moon',big:`${onFull.length+onNew.length}`,title:'Periods that began with the moon',text:`${onNew.length} of your periods started within a day of a new moon and ${onFull.length} within a day of a full moon.${onFull.length?' The latest full-moon start was '+short(onFull[onFull.length-1].sd,true)+'.':''}`});
+  // 4. most common moon phase and moon sign at period start
+  const pc={},sc={};PER.forEach(p=>{const n=moonPhase(p.sd).name;pc[n]=(pc[n]||0)+1;const g=sign(moonLon(p.sd))[0];sc[g]=(sc[g]||0)+1});
+  const tp=Object.entries(pc).sort((a,b)=>b[1]-a[1])[0],ts=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0],tsg=SIGNS.find(x=>x[0]===ts[0]);
+  out.push({tag:'Astrology',title:`Your period's favorite moon: ${tp[0]}`,text:`${tp[1]} of your ${PER.length} periods began under a ${tp[0].toLowerCase()}. The moon was most often in ${ts[0]} ${tsg[1]} (${ts[1]} times), the sign said to rule the ${tsg[3].toLowerCase()}.`});
+  // 5. consistency streak and exact 28s
+  let best=0,cur=0,bestEnd=null;CYC.forEach(c=>{if(c.valid&&Math.abs(c.len-28)<=2){cur++;if(cur>best){best=cur;bestEnd=c.start}}else cur=0});
+  const ex=CYC.filter(c=>c.valid&&c.len===28).length;
+  out.push({tag:'Your rhythm',big:`${best}`,title:'Cycles in a row within 2 days of 28',text:`That is your longest regular streak, ending with the cycle that began ${short(bestEnd,true)}. ${ex} of your cycles were exactly 28 days, a perfect moon-month.`});
+  // 6. shortest and longest
+  const vc=CYC.filter(c=>c.valid);if(vc.length){const mn=vc.reduce((a,b)=>b.len<a.len?b:a),mx=vc.reduce((a,b)=>b.len>a.len?b:a);
+  out.push({tag:'Your rhythm',title:`From ${mn.len} to ${mx.len} days`,text:`Your shortest regular cycle began ${short(mn.start,true)} (${mn.len} days) and your longest began ${short(mx.start,true)} (${mx.len} days).`})}
+  // 7. double-period months
+  const mc={};PER.forEach(p=>{const k=MOL[p.sd.getMonth()]+' '+p.sd.getFullYear();mc[k]=(mc[k]||0)+1});
+  const dbl=Object.keys(mc).filter(k=>mc[k]>1);
+  if(dbl.length)out.push({tag:'Your rhythm',title:`${dbl.length} "blue moon" months`,text:`Like a blue moon (two full moons in one month), you had two periods in the same calendar month in ${dbl.join(', ')}. With cycles shorter than 31 days this happens about once a year.`});
+  // 8. weekday and time of day
+  const WDL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const wc={};PER.forEach(p=>{const w=WDL[p.sd.getDay()];wc[w]=(wc[w]||0)+1});const tw=Object.entries(wc).sort((a,b)=>b[1]-a[1])[0];
+  const tc={};PER.forEach(p=>{const b=timeBucket(p.st);if(b)tc[b]=(tc[b]||0)+1});const tt2=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0];
+  out.push({tag:'Your rhythm',title:`Your period loves ${tw[0]}s`,text:`${tw[1]} periods started on a ${tw[0]}.${tt2?` And the most common start time was the ${tt2[0].toLowerCase()} (${tt2[1]} of ${Object.values(tc).reduce((a,b)=>a+b,0)} with a recorded time).`:''}`});
+  // 9. seasons
+  const sz={w:[],s:[]};vc.forEach(c=>{const m=c.start.getMonth();if(m===11||m<2)sz.w.push(c.len);else if(m>=5&&m<=7)sz.s.push(c.len)});
+  if(sz.w.length&&sz.s.length){const w=mean(sz.w),su=mean(sz.s);out.push({tag:'Chinese medicine',title:`Winter ${w.toFixed(1)} vs summer ${su.toFixed(1)} days`,text:`Your cycles that start in winter average ${w.toFixed(1)} days and summer ones ${su.toFixed(1)}. TCM teaches that winter is Kidney season, when the body conserves, and summer is Heart season, when energy moves outward.`})}
+  // 10. lifetime bleeding
+  const bd=PER.reduce((a,p)=>a+(p.plen&&p.plen<=12?p.plen:0),0),span=diff(PER[0].sd,TODAY)+1;
+  out.push({tag:'Your body',big:`${bd} days`,title:'Of bleeding recorded',text:`That is about ${Math.round(bd/span*100)}% of the days since ${short(PER[0].sd,true)}: across ${PER.length} periods, roughly ${(PER.length*0.035).toFixed(1)} liters of blood (about 35 ml a period) that your body built, released and renewed.`});
+  $('dataFacts').innerHTML=out.slice(0,12).map(f=>`<div class="fun${f.hl?' hl':''}"><span class="tag">${f.tag}</span>${f.big?`<span class="big num">${f.big}</span>`:''}<h3>${f.title}</h3><p class="muted">${f.text}</p></div>`).join('');
+  renderLore();
+}
+
+function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderToday();renderFacts();renderGuide();renderCal();renderDiary()}
 setSeg('metricSeg','m',UI.metric);setSeg('rangeSeg','r',UI.range);
 rebuild();
 if(pref('trends')==='0'){tt.setAttribute('aria-expanded','false');$('trends').hidden=true}
