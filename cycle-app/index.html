@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Soul Flow Cycle">
 <title>Soul Flow Cycle</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,6 +151,9 @@ button.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink
 .formgrid label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink-2)}
 footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
 .flag{font-size:11.5px;font-weight:700;color:var(--warn)}
+.install{gap:10px;padding-block:14px}
+.install summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.install ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 </style>
 </head><body>
 
@@ -163,6 +166,17 @@ footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
     </div>
     <div class="today-chip" id="topChip"></div>
   </header>
+
+  <details class="card install" id="installCard">
+    <summary><span class="eyebrow">Get the app</span> <b>Put Soul Flow Cycle on your iPhone home screen</b></summary>
+    <ol>
+      <li>Open this page's link in <b>Safari</b> on your iPhone and sign in to claude.ai if asked.</li>
+      <li>Tap the <b>Share</b> button (the square with an arrow pointing up) at the bottom of the screen.</li>
+      <li>Scroll down and tap <b>Add to Home Screen</b>, name it "Soul Flow Cycle", then tap <b>Add</b>.</li>
+      <li>Open it from your home screen like any other app.</li>
+    </ol>
+    <p class="note">Your entries are saved on each device separately. To move them, tap "Back up data" in the diary on one device and "Restore" on the other.</p>
+  </details>
 
   <!-- DASHBOARD -->
   <section class="card" aria-labelledby="dashH">
