@@ -1,0 +1,892 @@
+<title>Soul Flow Cycle</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column of "moon pages" — dashboard first, then today, guidance, calendar, diary. */
+:root{
+  --bg:#F5F2F8; --surface:#FFFFFF; --surface-2:#EEE8F3; --ink:#241D2C; --ink-2:#5E5468; --ink-3:#8A8093;
+  --line:#DDD5E4; --accent:#8E2A4D; --accent-ink:#FFFFFF; --moon:#C9C3D6; --moon-dark:#4A4358;
+  --men:#B0304F; --fol:#1479A6; --ovu:#C2860F; --lut:#6A4FB0;
+  --good:#2E7D4F; --warn:#A86A00;
+  --display:"Marcellus","Cormorant Garamond",Georgia,serif;
+  --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141018; --surface:#1D1823; --surface-2:#271F2F; --ink:#F1EAF4; --ink-2:#B9AEC3; --ink-3:#8C8297;
+  --line:#3A3145; --accent:#E0607A; --accent-ink:#1A0E14; --moon:#E8E2F2; --moon-dark:#3A3346;
+  --men:#E0607A; --fol:#4AA6CC; --ovu:#C98F22; --lut:#9C83E6; --good:#5BC285; --warn:#E0A84A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141018; --surface:#1D1823; --surface-2:#271F2F; --ink:#F1EAF4; --ink-2:#B9AEC3; --ink-3:#8C8297;
+  --line:#3A3145; --accent:#E0607A; --accent-ink:#1A0E14; --moon:#E8E2F2; --moon-dark:#3A3346;
+  --men:#E0607A; --fol:#4AA6CC; --ovu:#C98F22; --lut:#9C83E6; --good:#5BC285; --warn:#E0A84A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.1}
+h2{font-size:24px}
+h3{font-size:18px}
+p{margin:0}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.muted{color:var(--ink-2)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
+textarea{width:100%;resize:vertical}
+
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:6px}
+header.top .brand{display:flex;flex-direction:column;gap:6px}
+header.top .today-chip{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px}
+
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sec-head>div:first-child{display:flex;flex-direction:column;gap:2px}
+.cal-head>div:first-child{display:flex;flex-direction:column;gap:2px}
+
+/* KPI row */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--surface-2);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpi .v{font-family:var(--display);font-size:28px;line-height:1.1}
+.kpi .v small{font-family:var(--body);font-size:13px;color:var(--ink-2)}
+.kpi .s{font-size:13px;color:var(--ink-2)}
+.meter{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:4px}
+.meter>i{display:block;height:100%;background:var(--accent);border-radius:6px}
+
+.toggle{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px}
+.toggle .chev{display:inline-block;transition:transform .25s}
+.toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+@media (prefers-reduced-motion:reduce){.toggle .chev{transition:none}}
+
+.trends{display:flex;flex-direction:column;gap:14px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.pager{display:flex;align-items:center;gap:8px}
+.arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:16px}
+.arrow:disabled{opacity:.35;cursor:default}
+.pager .lbl{min-width:150px;text-align:center;font-weight:700;font-size:14px}
+.chart-box{position:relative;min-width:0}
+.chart-box svg{display:block;width:100%;height:auto;overflow:visible}
+.chart-box text{fill:var(--ink-3);font-family:var(--mono);font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);padding:8px 10px;border-radius:8px;font-size:12.5px;line-height:1.4;white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));z-index:5}
+.chart-sum{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.chart-sum b{color:var(--ink);font-family:var(--mono);font-weight:500}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+td.num,th.num{text-align:right}
+.linkbtn{background:none;border:0;color:var(--accent);font-weight:700;font-size:13px;padding:4px 0}
+.month-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:4px}
+.month-strip div{border-radius:6px;padding:6px 0;text-align:center;font-size:12px;font-family:var(--mono)}
+
+/* Today */
+.today-grid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:760px){.today-grid{grid-template-columns:1fr}}
+.wheel{max-width:300px;width:100%;margin:0 auto}
+.wheel text{font-family:var(--body)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fact{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.fact .t{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em}
+.ph-men{--ph:var(--men)} .ph-fol{--ph:var(--fol)} .ph-ovu{--ph:var(--ovu)} .ph-lut{--ph:var(--lut)}
+.pill.ph{background:color-mix(in srgb,var(--ph) 16%,transparent);color:var(--ph)}
+.banner{border-radius:12px;padding:12px 14px;background:color-mix(in srgb,var(--lut) 12%,transparent);border:1px solid color-mix(in srgb,var(--lut) 35%,transparent);font-size:14px}
+.banner.fert{background:color-mix(in srgb,var(--ovu) 12%,transparent);border-color:color-mix(in srgb,var(--ovu) 40%,transparent)}
+
+/* Guidance */
+.daybar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.daybar .lbl{font-weight:700}
+.tips3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.tipcard{background:var(--surface-2);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
+.tabs button{border:0;background:none;padding:10px 14px;font-weight:700;font-size:14px;color:var(--ink-2);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.block{display:flex;flex-direction:column;gap:8px;min-width:0}
+.block ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.block li b{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;background:var(--surface)}
+button.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.note{font-size:12.5px;color:var(--ink-3)}
+.point{border-left:3px solid var(--ph,var(--accent));padding-left:10px}
+
+/* Calendar */
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .dow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);text-align:center;font-weight:700;padding-bottom:4px}
+.day{position:relative;min-height:clamp(46px,9vw,76px);max-width:100%;border-radius:10px;border:1px solid transparent;background:var(--surface-2);display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:5px 6px;font-size:13px;min-width:0;text-align:left}
+.day.out{opacity:.35}
+.day .d{font-family:var(--mono);font-weight:500}
+.day.bleed{background:var(--men);color:#fff}
+.day.pred{background:transparent;border:2px dashed var(--men)}
+.day.fert{background:color-mix(in srgb,var(--ovu) 22%,var(--surface))}
+.day.ov{box-shadow:inset 0 0 0 2px var(--ovu)}
+.day.today .d{text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.day.sel{outline:2px solid var(--ink);outline-offset:1px}
+.day .marks{display:flex;gap:3px;align-items:center;width:100%;justify-content:flex-end}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--lut)}
+.dot.note{background:var(--ink-2)}
+.day.bleed .dot.note{background:#fff}
+.day .moonmark svg{display:block}
+@media (max-width:520px){.day{font-size:11px;padding:3px 4px;border-radius:7px}}
+.daypanel{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:700;font-size:13.5px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.danger{color:var(--men);border-color:color-mix(in srgb,var(--men) 50%,var(--line))}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;z-index:20}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}
+.formgrid label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--ink-2)}
+footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
+.flag{font-size:11.5px;font-weight:700;color:var(--warn)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">Soul Flow by Maayan · Moon cycle journal</span>
+      <h1>Soul Flow Cycle</h1>
+      <p class="muted">Your period diary, fertility window, moon and stars, with daily nourishment from herbal and Chinese medicine traditions.</p>
+    </div>
+    <div class="today-chip" id="topChip"></div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section class="card" aria-labelledby="dashH">
+    <div class="sec-head">
+      <div><span class="eyebrow">Dashboard</span><h2 id="dashH">Your cycle trends</h2></div>
+      <button class="toggle" id="trendToggle" aria-expanded="true" aria-controls="trends">Trend graphs <span class="chev" aria-hidden="true">▾</span></button>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="trends" id="trends">
+      <div class="controls">
+        <div class="seg" id="metricSeg" role="group" aria-label="What to chart">
+          <button data-m="len" aria-pressed="true">Cycle length</button>
+          <button data-m="plen" aria-pressed="false">Period length</button>
+          <button data-m="dev" aria-pressed="false">Days off 28</button>
+        </div>
+        <div class="seg" id="rangeSeg" role="group" aria-label="Time range">
+          <button data-r="1M" aria-pressed="false">Month</button>
+          <button data-r="3M" aria-pressed="false">3 mo</button>
+          <button data-r="6M" aria-pressed="false">6 mo</button>
+          <button data-r="1Y" aria-pressed="true">1 yr</button>
+          <button data-r="3Y" aria-pressed="false">3 yrs</button>
+          <button data-r="ALL" aria-pressed="false">All</button>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="pager">
+          <button class="arrow" id="prevWin" aria-label="Earlier period">‹</button>
+          <span class="lbl" id="winLbl"></span>
+          <button class="arrow" id="nextWin" aria-label="Later period">›</button>
+        </div>
+        <div class="legend" id="chartLegend"></div>
+      </div>
+      <div class="chart-box" id="chartBox"></div>
+      <div class="chart-sum" id="chartSum"></div>
+      <div><button class="linkbtn" id="tblToggle" aria-expanded="false">Show as table</button></div>
+      <div class="tbl-wrap" id="chartTable" hidden></div>
+      <div class="block">
+        <h3>Year by year</h3>
+        <div class="tbl-wrap" id="yearTable"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODAY -->
+  <section class="card" aria-labelledby="todayH">
+    <div class="sec-head"><div><span class="eyebrow" id="todayEyebrow">Today</span><h2 id="todayH">Where you are in your cycle</h2></div></div>
+    <div class="today-grid">
+      <div id="wheel" class="wheel"></div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div id="todayBanner"></div>
+        <div class="facts" id="facts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDANCE -->
+  <section class="card" aria-labelledby="guideH" id="guide">
+    <div class="sec-head">
+      <div><span class="eyebrow">Daily wisdom</span><h2 id="guideH">Nourish your phase</h2></div>
+      <div class="daybar">
+        <button class="arrow" id="dPrev" aria-label="Previous day">‹</button>
+        <span class="lbl" id="dLbl"></span>
+        <button class="arrow" id="dNext" aria-label="Next day">›</button>
+        <button class="btn" id="dToday">Today</button>
+      </div>
+    </div>
+    <div class="tips3" id="tips3"></div>
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-t="food" aria-selected="true">Nutrition</button>
+      <button role="tab" data-t="herb" aria-selected="false">Herbal wisdom</button>
+      <button role="tab" data-t="tcm" aria-selected="false">Chinese medicine</button>
+      <button role="tab" data-t="moon" aria-selected="false">Moon &amp; astrology</button>
+      <button role="tab" data-t="pms" aria-selected="false">PMS care</button>
+      <button role="tab" data-t="move" aria-selected="false">Movement &amp; ritual</button>
+    </div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="card" aria-labelledby="calH">
+    <div class="cal-head">
+      <div><span class="eyebrow">Calendar</span><h2 id="calH"></h2></div>
+      <div class="pager">
+        <button class="arrow" id="cPrev" aria-label="Previous month">‹</button>
+        <button class="btn" id="cToday">This month</button>
+        <button class="arrow" id="cNext" aria-label="Next month">›</button>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--men)"></i>Period (logged)</span>
+      <span><i class="sw" style="border:2px dashed var(--men)"></i>Period (predicted)</span>
+      <span><i class="sw" style="background:color-mix(in srgb,var(--ovu) 30%,var(--surface))"></i>Fertile window</span>
+      <span><i class="sw" style="box-shadow:inset 0 0 0 2px var(--ovu)"></i>Ovulation (est.)</span>
+      <span><i class="dot"></i>PMS window</span>
+      <span><i class="dot note"></i>Diary note / symptoms</span>
+      <span id="moonLegend"></span>
+    </div>
+    <div class="cal" id="cal"></div>
+    <div class="daypanel" id="dayPanel"></div>
+  </section>
+
+  <!-- DIARY -->
+  <section class="card" aria-labelledby="diaryH">
+    <div class="sec-head">
+      <div><span class="eyebrow">Menstrual period diary</span><h2 id="diaryH">Every period you've recorded</h2></div>
+      <div class="row">
+        <button class="btn" id="exportBtn">Back up data</button>
+        <button class="btn" id="importBtn">Restore</button>
+      </div>
+    </div>
+    <div id="ioBox" hidden class="block"></div>
+    <form id="addForm" class="formgrid" autocomplete="off">
+      <label>Start date<input type="date" id="fStart" required></label>
+      <label>Start time<input type="text" id="fStartT" placeholder="e.g. 9:00 am"></label>
+      <label>End date<input type="date" id="fEnd"></label>
+      <label>End time<input type="text" id="fEndT" placeholder="optional"></label>
+      <label style="grid-column:span 2">Note<input type="text" id="fNote" placeholder="e.g. 2 days early, heavy day 2"></label>
+      <button class="btn primary" type="submit">Add period</button>
+    </form>
+    <div class="tbl-wrap" id="diary"></div>
+    <div class="block">
+      <h3>Diary notes</h3>
+      <div id="notesList"></div>
+    </div>
+  </section>
+
+  <footer>
+    Predictions use the average of your last six regular cycles; ovulation is estimated at 14 days before the next period. This is a wellness journal, not medical advice or birth control: cycles shift, and the fertile window can't be known for sure without tests. Traditional herbs can interact with medicines, hormonal birth control and pregnancy, so check with your doctor or a licensed herbalist / TCM practitioner first. Moon and astrology notes come from folk and spiritual traditions. Your entries are saved only in this browser on this device; use "Back up data" to keep a copy.
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- seed: Maayan's recorded diary ---------- */
+const SEED={periods:[
+{s:'2023-07-28',st:'6:00 am',e:'2023-08-03',note:'7 days'},
+{s:'2023-09-05',st:'9:29 pm',e:'2023-09-12',et:'10:00 pm',note:'8 days'},
+{s:'2023-10-03',st:'12:15 pm',e:'2023-10-11',et:'7:44 am'},
+{s:'2023-10-28',st:'5:35 pm',e:'2023-11-03',et:'11:00 pm'},
+{s:'2023-11-27',st:'7:50 am',e:'2023-12-02',et:'9:00 am'},
+{s:'2023-12-25',st:'4:30 am',e:'2023-12-31',et:'5:00 pm'},
+{s:'2024-01-19',st:'8:00 am',e:'2024-01-26',et:'9:00 am'},
+{s:'2024-02-17',st:'12:00 pm',e:'2024-02-24',et:'11:36 pm',gap:'March not recorded'},
+{s:'2024-04-16',st:'6:00 pm',e:'2024-04-22',et:'11:00 pm'},
+{s:'2024-05-12',st:'11:00 am',e:'2024-05-19',et:'9:00 pm',note:'Exactly 4 weeks'},
+{s:'2024-06-07',st:'8:00 am',e:'2024-06-13',et:'9:00 pm'},
+{s:'2024-07-04',st:'9:00 am',e:'2024-07-13'},
+{s:'2024-08-01',st:'12:30 am',e:'2024-08-08',et:'11:00 am'},
+{s:'2024-08-29',st:'6:30 am',e:'2024-09-06',et:'7:00 am'},
+{s:'2024-09-26',st:'5:45 pm',e:'2024-10-04'},
+{s:'2024-10-24',st:'7:20 am',e:'2024-11-01',et:'8:00 am'},
+{s:'2024-11-22',st:'12:00 pm',e:'2024-11-30',et:'8:00 pm'},
+{s:'2024-12-19',st:'8:00 am',e:'2024-12-26',et:'8:00 pm'},
+{s:'2025-01-16',st:'6:00 am',e:'2025-01-23'},
+{s:'2025-02-12',st:'8:00 am',e:'2025-02-20'},
+{s:'2025-03-12',st:'7:00 am',e:'2025-03-19',et:'12:00 pm'},
+{s:'2025-04-08',st:'9:15 am',e:'2025-04-15',et:'9:00 am'},
+{s:'2025-05-09',st:'6:00 pm',e:'2025-05-15',et:'2:00 pm'},
+{s:'2025-06-04',st:'10:00 am',e:'2025-06-12',et:'10:00 am'},
+{s:'2025-07-03',st:'12:00 pm',e:'2025-07-10',et:'6:00 pm',note:'1 day late'},
+{s:'2025-08-01',st:'2:00 am',e:'2025-08-09',et:'10:00 am'},
+{s:'2025-08-29',st:'7:22 am',e:'2025-09-06',note:'9 days'},
+{s:'2025-09-25',st:'3:00 pm',e:'2025-10-02',et:'9:30 am',note:'Next period was expected 10/23',gap:'Missed period (pregnancy noted)'},
+{s:'2025-11-16',st:'8:00 pm',e:'2025-11-24',et:'7:00 pm'},
+{s:'2025-12-18',st:'12:00 pm',e:'2025-12-25',et:'8:00 pm'},
+{s:'2026-01-13',st:'morning',e:'2026-01-19',et:'night'},
+{s:'2026-02-10',e:'2026-02-17'},
+{s:'2026-03-09',st:'10:00 pm',e:'2026-03-16',et:'7:00 am'},
+{s:'2026-04-06',st:'10:00 am',e:'2026-04-13',et:'9:00 am'},
+{s:'2026-05-03',st:'2:00 pm',e:'2026-05-10',et:'2:00 pm'},
+{s:'2026-05-29',st:'11:00 am',e:'2026-06-05'},
+{s:'2026-06-27',st:'2:30',e:'2026-07-05',note:'8 days'},
+{s:'2026-07-25',st:'9:00 pm',e:'2026-08-01',et:'9:00 pm'},
+{s:'2026-08-24',st:'2:00 am',e:'2026-08-30',et:'9:00 pm'},
+{s:'2026-09-20',st:'9:00 am',e:'2026-09-26',et:'9:00 pm'},
+{s:'2026-10-15',st:'5:25 pm',e:'2026-10-22',note:'3 days early · 8 days'},
+{s:'2026-11-11',st:'5:00 am',e:'2026-11-18',et:'10:00 pm'}
+],notes:[
+{d:'2025-10-23',t:'Did not get period (pregnancy noted)'},
+{d:'2025-12-28',t:'Unprotected sex'},
+{d:'2025-12-29',t:'Took Plan B'},
+{d:'2026-01-09',t:'Unprotected sex'}
+],days:{}};
+
+const KEY='soulflow-cycle-v1';
+function clone(o){return JSON.parse(JSON.stringify(o))}
+let DB=(function(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&Array.isArray(d.periods))return Object.assign({notes:[],days:{}},d)}}catch(e){}return clone(SEED)})();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+function pref(k,v){try{if(v===undefined)return localStorage.getItem('sf-'+k);localStorage.setItem('sf-'+k,v)}catch(e){return null}}
+
+/* ---------- dates ---------- */
+const DAY=864e5;
+function P(s){const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c,12)}
+function F(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function add(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function addM(d,n){const x=new Date(d);x.setDate(1);x.setMonth(x.getMonth()+n);return x}
+function diff(a,b){return Math.round((b-a)/DAY)}
+const MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MOL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function nice(d,y){return WD[d.getDay()]+', '+MO[d.getMonth()]+' '+d.getDate()+(y?', '+d.getFullYear():'')}
+function short(d,y){return MO[d.getMonth()]+' '+d.getDate()+(y?' '+d.getFullYear():'')}
+const TODAY=(()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate(),12)})();
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mean(a){return a.length?a.reduce((x,y)=>x+y,0)/a.length:NaN}
+function sd(a){const m=mean(a);return a.length>1?Math.sqrt(mean(a.map(x=>(x-m)**2))):0}
+function dayIndex(d){return Math.floor(d.getTime()/DAY)}
+function pick(arr,d,salt){return arr[((dayIndex(d)+(salt||0))%arr.length+arr.length)%arr.length]}
+
+/* ---------- cycle model ---------- */
+let PER=[],CYC=[],PRED={L:28,P:7};
+function rebuild(){
+  PER=DB.periods.slice().sort((a,b)=>a.s<b.s?-1:1).map(p=>{const s=P(p.s),e=p.e?P(p.e):null;return Object.assign({},p,{sd:s,ed:e,plen:e?diff(s,e)+1:null})});
+  CYC=[];
+  for(let i=0;i<PER.length-1;i++){
+    const a=PER[i],b=PER[i+1],len=diff(a.sd,b.sd);
+    const valid=!a.gap&&len>=18&&len<=45;
+    CYC.push({i,start:a.sd,len,plen:a.plen,valid,reason:a.gap||(len>45?'Long gap':len<18?'Very short':'')});
+    a.cycleLen=len;a.cycleValid=valid;
+  }
+  const v=CYC.filter(c=>c.valid).slice(-6);
+  PRED.L=v.length?Math.round(mean(v.map(c=>c.len))):28;
+  const pl=PER.filter(p=>p.plen&&p.plen<=12).slice(-6).map(p=>p.plen);
+  PRED.P=pl.length?Math.round(mean(pl)):6;
+}
+function phaseOf(cd,L,pl){
+  const O=L-14;
+  if(cd<=pl)return'men';
+  if(cd>=O-2&&cd<=O+1)return'ovu';
+  if(cd<O-2)return'fol';
+  return'lut';
+}
+function info(date){
+  let idx=-1;
+  for(let i=PER.length-1;i>=0;i--){if(PER[i].sd<=date){idx=i;break}}
+  if(idx<0)return null;
+  const p=PER[idx],nx=PER[idx+1];
+  let start=p.sd,cd=diff(start,date)+1,L,predicted=false,late=false,pl=p.plen||PRED.P;
+  if(nx){L=diff(p.sd,nx.sd);if(L>45||p.gap){L=PRED.L;if(cd>L)late=true}}
+  else{
+    L=PRED.L;
+    if(cd>L){const k=Math.floor((cd-1)/L);start=add(p.sd,k*L);cd=cd-k*L;predicted=true;pl=PRED.P}
+  }
+  const phase=late?'lut':phaseOf(cd,L,pl);
+  const O=L-14;
+  const bleed=!predicted&&!late&&p.ed&&date>=p.sd&&date<=p.ed;
+  return{cd,L,pl,phase,O,start,predicted,late,
+    bleed:!!bleed,predBleed:predicted&&cd<=pl,
+    fertile:!late&&cd>=O-5&&cd<=O+1,ov:!late&&cd===O,pms:!late&&cd>=L-6&&phase==='lut',
+    nextStart:add(start,L),period:p};
+}
+function nextPeriod(){
+  const last=PER[PER.length-1];if(!last)return null;
+  let n=add(last.sd,PRED.L);while(n<TODAY)n=add(n,PRED.L);
+  // if late (past expected and no new log), keep showing expected date
+  const exp=add(last.sd,PRED.L);
+  return{date:exp<TODAY?n:exp,late:exp<TODAY?diff(exp,TODAY):0,expected:exp};
+}
+
+/* ---------- moon & sky ---------- */
+const SYN=29.530588853,REF=Date.UTC(2000,0,6,18,14);
+function moonAge(d){const t=(d.getTime()-REF)/DAY;return((t%SYN)+SYN)%SYN}
+const PHASES=[
+ ['New Moon',1.84,'The sky\'s inner winter. Rest, dream and set intentions. Folk tradition links this dark moon with bleeding: the White Moon rhythm.'],
+ ['Waxing Crescent',5.53,'Intentions sprout. Take one small, real step toward what you planted at the new moon.'],
+ ['First Quarter',9.22,'Momentum meets resistance. Build, decide, push through the first obstacle.'],
+ ['Waxing Gibbous',12.91,'Refine and prepare. Adjust plans and nourish what is growing.'],
+ ['Full Moon',16.61,'Peak light and peak energy. Celebrate, connect, create. Traditionally mirrored by ovulation.'],
+ ['Waning Gibbous',20.30,'Gratitude and sharing. Teach, give back, digest what the full moon revealed.'],
+ ['Last Quarter',23.99,'Let go and clear space. Declutter, forgive, finish what is unfinished.'],
+ ['Waning Crescent',27.68,'Surrender and recover. Slow down before the new cycle begins.']
+];
+function moonPhase(d){const a=moonAge(d);for(const p of PHASES)if(a<p[1])return{name:p[0],text:p[2],age:a};return{name:PHASES[0][0],text:PHASES[0][2],age:a}}
+function illum(a){return(1-Math.cos(2*Math.PI*a/SYN))/2}
+const rad=x=>x*Math.PI/180,norm=x=>((x%360)+360)%360;
+function jdN(d){return(d.getTime()-Date.UTC(2000,0,1,12))/DAY}
+function moonLon(d){const n=jdN(d);const L=218.316+13.176396*n,M=rad(134.963+13.064993*n),D=rad(297.850+12.190749*n),Ms=rad(357.529+0.98560028*n),Fm=rad(93.272+13.229350*n);
+ return norm(L+6.289*Math.sin(M)+1.274*Math.sin(2*D-M)+0.658*Math.sin(2*D)+0.214*Math.sin(2*M)-0.186*Math.sin(Ms)-0.114*Math.sin(2*Fm))}
+function sunLon(d){const n=jdN(d);const L=280.460+0.9856474*n,g=rad(357.528+0.9856003*n);return norm(L+1.915*Math.sin(g)+0.020*Math.sin(2*g))}
+const SIGNS=[
+['Aries','♈︎','Fire','Head & face','Bold starts and quick energy. Channel restlessness into a brisk walk or a fresh project.','Hydrate well, ease jaw and scalp tension, go light on very spicy food.'],
+['Taurus','♉︎','Earth','Throat & neck','Slow, sensual and grounded. Savor food, music and body care.','Warm root vegetables and grains; gentle neck rolls; hum or chant to open the throat.'],
+['Gemini','♊︎','Air','Arms, hands & lungs','Curious and chatty. Good for writing, learning and conversations.','Light, varied meals; alternate-nostril breathing (nadi shodhana) to settle a busy mind.'],
+['Cancer','♋︎','Water','Breasts & stomach','Tender and intuitive. Feelings run close to the surface; nest and nurture.','Soothing soups, coconut, chamomile; gentle breast massage and self-check.'],
+['Leo','♌︎','Fire','Heart & upper back','Warm, expressive and playful. Create, perform, be seen.','Heart-opening poses (camel, bridge); beets, berries and cacao for the heart.'],
+['Virgo','♍︎','Earth','Digestion & intestines','Practical and precise. Tidy up, plan, refine your routines.','Simple clean meals, fermented foods, fennel or peppermint tea for the gut.'],
+['Libra','♎︎','Air','Kidneys & lower back','Seeks balance and beauty. Ideal for partnership talks and art.','Drink water, warm the lower back, eat a balanced plate.'],
+['Scorpio','♏︎','Water','Womb & reproductive organs','Deep, private and transformative. Feel things fully and journal the truth.','Womb care: warmth on the belly, iron-rich foods; a castor oil pack (not while bleeding or pregnant).'],
+['Sagittarius','♐︎','Fire','Hips & thighs','Expansive and optimistic. Move, explore, think big.','Hip openers (pigeon, lizard); liver-loving bitter greens; go easy on excess.'],
+['Capricorn','♑︎','Earth','Knees, bones & skin','Focused and disciplined. Structure, goals and commitments.','Mineral-rich foods (sesame, greens, bone broth); keep the knees warm.'],
+['Aquarius','♒︎','Air','Ankles & circulation','Inventive, social and a little detached. Community and new ideas.','Ankle circles, legs-up-the-wall, omega-3 rich foods for circulation.'],
+['Pisces','♓︎','Water','Feet & lymph','Dreamy, psychic and permeable. Rest, art, water, prayer.','Warm foot soak with Epsom salt, dry brushing for lymph, extra sleep.']
+];
+function sign(lon){return SIGNS[Math.floor(lon/30)%12]}
+function moonEvents(d){ // new/full moon happening on this local day
+  const a=moonAge(new Date(d.getFullYear(),d.getMonth(),d.getDate(),0)),b=moonAge(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1,0));
+  if(b<a)return'new';if(a<SYN/2&&b>=SYN/2)return'full';return null}
+function moonSVG(age,size){
+  const r=size/2-1,c=size/2,p=age/SYN,rx=Math.abs(Math.cos(2*Math.PI*p))*r;
+  let s1,s2;if(p<.5){s1=1;s2=p<.25?0:1}else{s1=0;s2=p<.75?0:1}
+  const lit=`M${c},${c-r} A${r},${r} 0 0 ${s1} ${c},${c+r} A${rx},${r} 0 0 ${s2} ${c},${c-r}Z`;
+  return`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${r}" fill="var(--moon-dark)" stroke="var(--line)" stroke-width="1"/><path d="${lit}" fill="var(--moon)"/></svg>`}
+function lunarType(age){ // archetype for a period that starts at this moon age
+  const toNew=Math.min(age,SYN-age),toFull=Math.abs(age-SYN/2);
+  if(toNew<=3.7)return'White Moon';if(toFull<=3.7)return'Red Moon';return age<SYN/2?'Pink Moon':'Purple Moon'}
+const LUNAR={
+ 'White Moon':'Bleeding near the new moon and ovulating near the full moon. In moon lore this is the nurturing, fertile rhythm, synced with the light.',
+ 'Red Moon':'Bleeding near the full moon. Lore links it with the healer, the creative and the wise woman: energy turned inward while the sky is bright.',
+ 'Pink Moon':'Bleeding with the waxing moon: a rhythm in transition from inward toward outward energy.',
+ 'Purple Moon':'Bleeding with the waning moon: a rhythm of transition, deep release and healing.'
+};
+
+/* ---------- wisdom library ---------- */
+const PH={
+men:{name:'Menstrual',season:'Inner winter',arch:'The Wise Woman',moon:'New moon energy',days:'Bleeding days',
+ food:{focus:'Replenish iron and minerals; eat warm, cooked, easy-to-digest food.',
+  eat:['Bone broth or miso soup','Lentils, black beans, grass-fed beef','Spinach, kale and chard with lemon','Beets and red dates (jujube)','Seaweed: kelp, nori, wakame','Salmon or sardines (omega-3 eases cramps)','Dark chocolate 70%+ (magnesium)','Ginger, cinnamon, turmeric'],
+  less:'Iced drinks, raw salads, excess salt, coffee, alcohol',
+  seeds:'Flax + pumpkin seeds, 1 tbsp each (days 1–14)',
+  recipe:'Red lentil and ginger dal with wilted spinach and a squeeze of lemon.',
+  tips:['Sip warm ginger tea with a pinch of cinnamon to ease cramps.','Pair iron-rich greens with vitamin C (lemon, bell pepper) to absorb more iron.','A square of dark chocolate brings magnesium to relax the uterus.','Start with congee: rice simmered with ginger and red dates, a classic recovery breakfast.','Add seaweed to soup today to restore minerals lost through bleeding.','Swap iced drinks for warm water or herbal tea all day.','Eat salmon or sardines this week; omega-3 fats calm the prostaglandins behind cramps.']},
+ herbs:[['Ginger','Warms the womb and eases cramps; studies show it rivals ibuprofen for period pain.'],['Red raspberry leaf','Traditional uterine tonic; a gentle daily tea to tone the womb.'],['Cramp bark','Its name says it: a classic antispasmodic for cramping in Western herbalism.'],['Chamomile','Calms nerves and smooth muscle; lovely before bed.'],['Nettle','Mineral and iron-rich nourishing infusion to rebuild blood.'],['Yarrow','Traditionally used to regulate heavy flow. Avoid if pregnant.']],
+ tcm:{title:'Blood phase · 行血 move the Blood',body:'In Chinese medicine the Liver moves Qi and Blood down and out. Your task is to let the flow be smooth: stay warm, rest, avoid cold. Clots, dark blood and sharp cramps point to stagnation or "cold in the womb".',organs:'Liver, Kidney',nature:'Warm foods; no cold or raw',
+  points:[['SP6 · Sanyinjiao','Four finger-widths above the inner ankle bone, behind the shin. Press 1–2 min each side for cramps. Avoid in pregnancy.'],['LV3 · Taichong','On top of the foot between the big and second toe. Moves stuck Qi, eases irritability and pain.'],['CV4 · Guanyuan','Four finger-widths below the navel. Warmth here (hot water bottle) comforts the womb.']],
+  tips:['Keep feet and lower back covered; TCM teaches that cold enters through the feet and stagnates Blood.','Rest is medicine now. Qi spent today is borrowed from your next cycle.','Lay a hot water bottle on your lower belly for 20 minutes.','Skip hair washing late at night and never go to bed with wet hair during your period, an old TCM habit to avoid cold.','Press SP6 on each leg for one minute when cramps arrive.','Drink brown sugar and ginger tea (红糖姜茶), the classic Chinese period remedy.']},
+ ayur:'Vata time: the downward energy, Apana Vayu, carries the flow. Ground yourself with warm, oily, cooked meals and gentle self-massage with warm sesame oil (avoid the belly if tender).',
+ move:['Rest, yin and restorative yoga','Child\'s pose, supported bound angle, legs up the wall','Slow walks outdoors','Many yoga traditions skip inversions while bleeding'],
+ ritual:'Journal and dream. The veil is thin: ask what wants to be released and what you want to call in this cycle.',
+ pms:'Bleeding has begun, so PMS should ease. Focus on cramps, fatigue and low iron.'},
+fol:{name:'Follicular',season:'Inner spring',arch:'The Maiden',moon:'Waxing moon energy',days:'After bleeding, before ovulation',
+ food:{focus:'Light, fresh and fermented foods; rebuild blood and support estrogen as it rises.',
+  eat:['Fermented foods: kimchi, sauerkraut, kefir','Sprouts and microgreens','Eggs, chicken, wild fish','Avocado and olive oil','Citrus, berries, green apples','Oats, quinoa, sprouted grains','Zucchini, peas, carrots','Black sesame and goji berries'],
+  less:'Heavy fried food, excess sugar',
+  seeds:'Flax + pumpkin seeds, 1 tbsp each (days 1–14)',
+  recipe:'Spring bowl: quinoa, avocado, sauerkraut, soft egg, sprouts and lemon-tahini.',
+  tips:['Start the morning with warm lemon water to wake up digestion.','Add a forkful of sauerkraut or kimchi to lunch; a healthy gut clears used hormones.','Try a new recipe; your brain loves novelty in this phase.','Sprinkle ground flax on oats; its lignans help balance estrogen.','Snack on goji berries and black sesame, both nourish Blood and Yin in TCM.','Build a big colorful salad; your digestion handles raw food best now.','Eat protein at breakfast to fuel the rising energy of this phase.']},
+ herbs:[['Nettle','Daily nourishing infusion; rebuilds minerals after bleeding.'],['Shatavari','Ayurveda\'s great women\'s rejuvenative ("she who has a hundred husbands").'],['Red clover','Traditional blood cleanser and source of gentle plant estrogens.'],['Dandelion root','Supports the liver, which clears hormones.'],['Lemon balm','Uplifting and focusing; lovely iced or hot.'],['Goji berry','Chinese tonic that nourishes Liver Blood and Kidney Yin.']],
+ tcm:{title:'Yin phase · 滋阴 nourish Yin and Blood',body:'After bleeding, Blood and Yin are empty and need refilling. The Kidneys (root of fertility) and Liver Blood are the focus. Good sleep builds Yin: aim to be asleep by 11 pm, before the Liver hours of 1–3 am.',organs:'Kidney, Liver',nature:'Nourishing, moist; dark-colored foods feed the Kidneys',
+  points:[['KD3 · Taixi','In the hollow between the inner ankle bone and the Achilles tendon. Nourishes Kidney Yin.'],['ST36 · Zusanli','Four finger-widths below the kneecap, one finger outside the shin. Builds Qi and Blood.'],['SP6 · Sanyinjiao','Above the inner ankle. Nourishes Yin and Blood for the coming egg.']],
+  tips:['Eat something black today: black beans, black sesame or black rice, all said to feed the Kidneys.','Go to bed before 11 pm; TCM says Yin and Blood rebuild during sleep.','Rub KD3 behind each inner ankle for a minute before bed.','Slow-cooked bone broth or chicken soup rebuilds Blood after your period.','Avoid over-exercising; too much sweating drains Yin in this rebuilding stage.','Goji and red date tea (枸杞红枣茶) is a gentle daily Blood tonic.']},
+ ayur:'Kapha qualities support building. Favor light, warm, lightly spiced food, dry brushing and invigorating movement to keep energy moving.',
+ move:['Try a new class: vinyasa, dance, climbing','Build strength; your body recovers faster now','Hikes and longer walks','Start creative projects and make plans'],
+ ritual:'Plant seeds. Write your intentions, start a project, and say yes to something new.',
+ pms:'Usually your easiest, clearest days. Bank this energy and notice your mood baseline.'},
+ovu:{name:'Ovulatory',season:'Inner summer',arch:'The Mother',moon:'Full moon energy',days:'Peak fertility',
+ food:{focus:'Fiber, cruciferous veg and antioxidants to clear estrogen peaks; cool, hydrating foods.',
+  eat:['Broccoli, cauliflower, Brussels sprouts','Berries, pomegranate, cherries','Raw veggies and big salads','Quinoa and red lentils','Wild salmon','Almonds and walnuts','Cucumber, mint, coconut water','Tomatoes and bell peppers'],
+  less:'Very spicy, fried or greasy foods; excess alcohol',
+  seeds:'Switch to sesame + sunflower seeds after ovulation (days 15–28)',
+  recipe:'Rainbow salad of roasted cauliflower, chickpeas, mint, pomegranate and lemon.',
+  tips:['Load up on cruciferous veg today; they help your liver clear the estrogen peak.','Drink coconut water or cucumber-mint water to stay cool and hydrated.','Berries and pomegranate bring antioxidants that protect the egg.','Eat walnuts, a TCM food for supporting the Yang that rises after ovulation.','Choose lighter meals; energy is high and digestion is strong.','Switch your seed cycling to sesame and sunflower once ovulation passes.']},
+ herbs:[['Rose','Heart-opening and cooling; a rose and hibiscus tea suits this phase.'],['Hibiscus','Cooling and rich in antioxidants.'],['Maca','Andean root used traditionally for libido and fertility.'],['Dandelion leaf','Gentle diuretic and liver support.'],['Red raspberry leaf','Continues toning the uterus.'],['Damiana','Traditional aphrodisiac in Mexican herbalism. Avoid if pregnant.']],
+ tcm:{title:'Yang transition · 阴转阳 Yin turns into Yang',body:'Yin peaks, the egg is released and Yang begins to rise. Smoothly flowing Liver Qi makes the turn easy; stagnation shows up as ovulation pain or spotting. Gentle warmth supports the rising Yang.',organs:'Kidney Yang, Liver',nature:'Balanced; add gentle warming spice',
+  points:[['ST36 · Zusanli','Below the knee. Strengthens Qi for the transition.'],['SP10 · Xuehai',"\"Sea of Blood\", about three finger-widths above the inner kneecap. Keeps Blood moving."],['CV6 · Qihai','Two finger-widths below the navel. Warms and builds Qi.']],
+  tips:['Add a little cinnamon or ginger to meals to support rising Yang.','Take a brisk walk to keep Liver Qi moving through the ovulation turn.','Notice egg-white cervical mucus; TCM sees it as Yin at its fullest.','Avoid ice-cold drinks; cold can block the shift from Yin to Yang.','Keep your lower back warm; the Kidneys govern this transition.','Express yourself; laughter and connection keep Qi flowing.']},
+ ayur:'Pitta rises with the heat of ovulation. Cool it with sweet fruit, coconut, cilantro, mint and time near water.',
+ move:['High-intensity workouts, dance, running','Group classes and social movement','Heart openers and backbends','Peak power: lift your heaviest now'],
+ ritual:'Celebrate and connect. Have the important conversation, share your work, make love, create.',
+ pms:'Some feel ovulation twinges (mittelschmerz), light spotting or a libido spike. All normal.'},
+lut:{name:'Luteal',season:'Inner autumn',arch:'The Enchantress',moon:'Waning moon energy',days:'After ovulation until bleeding',
+ food:{focus:'Steady blood sugar with complex carbs, plus magnesium, B6 and calcium to prevent PMS.',
+  eat:['Sweet potato, squash, pumpkin','Brown rice, oats, millet','Chickpeas and lentils','Turkey and salmon','Bananas (B6) and apples','Leafy greens (calcium, magnesium)','Pumpkin seeds, walnuts, dark chocolate','Cinnamon, ginger, turmeric'],
+  less:'Salt (bloating), caffeine (breast tenderness, anxiety), sugar, alcohol',
+  seeds:'Sesame + sunflower seeds, 1 tbsp each (days 15–28)',
+  recipe:'Roasted sweet potato and chickpea stew with turmeric, ginger and greens.',
+  tips:['Eat every 3–4 hours to keep blood sugar steady and moods even.','Roast a tray of sweet potato and squash; complex carbs lift serotonin.','A banana with almond butter gives B6 and magnesium, a PMS-calming duo.','Cut back on salt this week to prevent bloating.','Swap coffee for cacao or matcha; caffeine worsens breast tenderness.','Your metabolism runs a little faster now, so a heartier meal is welcome.','Add pumpkin seeds to everything; they are rich in magnesium and zinc.']},
+ herbs:[['Vitex (chaste tree)','The best-studied herb for PMS, breast tenderness and irritability. Not with hormonal birth control or in pregnancy.'],['Dandelion root','Supports the liver and eases bloating.'],['Lemon balm','Calms anxiety and mood swings.'],['Peppermint','Relieves bloating and headaches.'],['Evening primrose oil','Traditional for breast tenderness.'],['Rose & skullcap','Soothe the heart and nervous tension.']],
+ tcm:{title:'Yang phase · 温阳 warm the Yang',body:'Kidney Yang warms the womb to hold a possible pregnancy (your temperature rises). When Liver Qi gets stuck, PMS appears: irritability, breast tenderness, bloating, sighing, cravings. Move the Qi: walk, breathe, express, cry if you need to.',organs:'Liver, Kidney Yang, Spleen',nature:'Warming; avoid greasy, cold and raw',
+  points:[['LV3 · Taichong','Between the big and second toe. The great PMS point for moving stuck Liver Qi.'],['PC6 · Neiguan','Three finger-widths above the inner wrist crease. Calms anxiety and nausea.'],['Yintang','Between the eyebrows. Settles the mind (Shen) and helps sleep.']],
+  tips:['Drink rose bud tea (玫瑰花茶), the classic TCM remedy for stuck Liver Qi and moodiness.','Add a strip of dried tangerine peel (陈皮 chen pi) to tea to move Qi and ease bloating.','Sigh it out: long exhales release Liver Qi tension.','Keep warm and skip ice cream; cold food weakens the Spleen and worsens bloating.','Press LV3 on both feet when irritability rises.','Eat radish or daikon to help Qi move downward and relieve bloating.','Xiao Yao San ("Free and Easy Wanderer") is the classical PMS formula. Use only with a licensed practitioner.']},
+ ayur:'Pitta then Vata: early on you may feel fiery and irritable, later anxious or scattered. Cool first with sweet and bitter foods, then ground with warm, oily meals and routine.',
+ move:['Strength and Pilates early in the phase','Slower yoga, yin and long walks as bleeding nears','Twists for digestion and bloating','Lower intensity if PMS is strong'],
+ ritual:'Tell the truth, edit and complete. Your inner critic is loud, so use it to declutter and finish projects, not to judge yourself.',
+ pms:'PMS lives here, especially in the last 7 days. See the remedies below.'}
+};
+const SYMPTOMS=['Cramps','Bloating','Mood swings','Irritability','Anxiety','Low mood','Breast tenderness','Headache','Cravings','Fatigue','Acne','Insomnia','Back pain','Spotting'];
+const REMEDY={
+ 'Cramps':['Ginger tea, magnesium-rich foods, omega-3s','Cramp bark, chamomile','SP6 + heat on CV4'],
+ 'Bloating':['Less salt, more potassium (banana, avocado), fennel','Dandelion leaf, peppermint, fennel tea','Chen pi (tangerine peel) tea, belly massage clockwise'],
+ 'Mood swings':['Complex carbs every 3–4 hours, B6 (banana, turkey)','Vitex, lemon balm','LV3, rose bud tea'],
+ 'Irritability':['Cut caffeine and sugar, add leafy greens','Vitex, rose','LV3; long exhales; a walk'],
+ 'Anxiety':['Magnesium (pumpkin seeds, cacao), steady meals','Lemon balm, skullcap, chamomile','PC6, Yintang'],
+ 'Low mood':['Omega-3s, sunlight, tryptophan (turkey, oats)','Lemon balm, rose','ST36, gentle movement'],
+ 'Breast tenderness':['Less caffeine and salt, more fiber','Evening primrose oil, vitex','LV3, gentle breast massage'],
+ 'Headache':['Hydrate, magnesium, steady blood sugar','Peppermint oil on temples, feverfew','LI4 (avoid if pregnant), GB20 at the skull base'],
+ 'Cravings':['Protein and fat at each meal, dark chocolate, sweet potato','Cinnamon tea','ST36; eat warm, regular meals for the Spleen'],
+ 'Fatigue':['Iron (lentils, greens), B vitamins, early nights','Nettle, ashwagandha','ST36, KD1 on the sole of the foot'],
+ 'Acne':['Zinc (pumpkin seeds), less dairy and sugar','Spearmint tea, burdock','Clear Liver heat: mung beans, cucumber'],
+ 'Insomnia':['Magnesium, tart cherry, a warm milk with nutmeg','Chamomile, passionflower','HT7 at the wrist crease, Yintang'],
+ 'Back pain':['Anti-inflammatory foods: turmeric, ginger','Cramp bark','Warmth on the lower back (Kidney area)'],
+ 'Spotting':['Iron-rich foods','Talk to your doctor if it is new or frequent','Rest; avoid heavy lifting']
+};
+
+/* ---------- UI state ---------- */
+const UI={metric:pref('metric')||'len',range:pref('range')||'1Y',winEnd:TODAY,view:TODAY,tab:'food',calM:new Date(TODAY.getFullYear(),TODAY.getMonth(),1,12),table:false};
+const $=id=>document.getElementById(id);
+function toast(m){const t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)}
+
+/* ---------- KPIs ---------- */
+function consistency(lens){if(!lens.length)return null;return Math.round(100*mean(lens.map(l=>Math.max(0,1-Math.abs(l-28)/7))))}
+function consLabel(s){return s>=85?'Very regular':s>=70?'Regular':s>=50?'Somewhat variable':'Irregular'}
+function renderKPIs(){
+  const yr=add(TODAY,-365);
+  const v12=CYC.filter(c=>c.valid&&c.start>=yr),lens=v12.map(c=>c.len);
+  const pl=PER.filter(p=>p.sd>=yr&&p.plen&&p.plen<=12).map(p=>p.plen);
+  const all=CYC.filter(c=>c.valid).map(c=>c.len);
+  const np=nextPeriod();const dTo=np?diff(TODAY,np.date):0;
+  const cs=consistency(lens),within=lens.filter(l=>Math.abs(l-28)<=2).length;
+  const ages=PER.slice(-12).map(p=>lunarType(moonAge(p.sd)));
+  const counts={};ages.forEach(a=>counts[a]=(counts[a]||0)+1);
+  const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+  const prev=CYC.filter(c=>c.valid&&c.start<yr&&c.start>=add(yr,-365)).map(c=>c.len);
+  const trend=prev.length&&lens.length?mean(lens)-mean(prev):0;
+  $('kpis').innerHTML=`
+   <div class="kpi"><span class="eyebrow">Next period</span><span class="v">${np?short(np.date):'—'}</span><span class="s">${np?(np.late?`Expected ${short(np.expected)} · ${np.late} days late`:dTo===0?'Expected today':`in ${dTo} days`):''}</span></div>
+   <div class="kpi"><span class="eyebrow">Average cycle</span><span class="v num">${lens.length?mean(lens).toFixed(1):'—'} <small>days</small></span><span class="s">Last 12 months · range ${Math.min(...lens)}–${Math.max(...lens)}${trend?` · ${trend>0?'+':''}${trend.toFixed(1)} vs year before`:''}</span></div>
+   <div class="kpi"><span class="eyebrow">Period length</span><span class="v num">${pl.length?mean(pl).toFixed(1):'—'} <small>days</small></span><span class="s">Average bleeding days, last 12 months</span></div>
+   <div class="kpi"><span class="eyebrow">Consistency (vs 28 days)</span><span class="v num">${cs??'—'}<small>/100</small></span><div class="meter"><i style="width:${cs||0}%"></i></div><span class="s">${cs!=null?consLabel(cs)+` · ${within} of ${lens.length} cycles within ±2 days`:''}</span></div>
+   <div class="kpi"><span class="eyebrow">Lunar rhythm</span><span class="v" style="font-size:22px">${top?top[0]:'—'}</span><span class="s">${top?`${top[1]} of your last ${ages.length} periods`:''} · ${all.length} cycles logged since ${short(PER[0].sd,true)}</span></div>`;
+}
+
+/* ---------- trend chart ---------- */
+const RANGE={'1M':1,'3M':3,'6M':6,'1Y':12,'3Y':36,'ALL':0};
+function windowBounds(){
+  const n=RANGE[UI.range];
+  if(!n)return[PER[0].sd,TODAY];
+  if(UI.range==='1M'){const s=new Date(UI.winEnd.getFullYear(),UI.winEnd.getMonth(),1,12);return[s,add(addM(s,1),-1)]}
+  return[add(addM(UI.winEnd,-n),1),UI.winEnd];
+}
+function renderChart(){
+  const[ws,we]=windowBounds();const n=RANGE[UI.range];
+  $('winLbl').textContent=UI.range==='1M'?MOL[ws.getMonth()]+' '+ws.getFullYear():short(ws,true)+' – '+short(we,true);
+  $('prevWin').disabled=!n||ws<=PER[0].sd;
+  $('nextWin').disabled=!n||we>=TODAY;
+  const box=$('chartBox');
+  if(UI.range==='1M'){renderMonthStrip(ws,we);return}
+  const isP=UI.metric==='plen';
+  const rows=isP?PER.filter(p=>p.sd>=ws&&p.sd<=we&&p.plen).map(p=>({d:p.sd,v:p.plen,p})):CYC.filter(c=>c.valid&&c.start>=ws&&c.start<=we).map(c=>({d:c.start,v:UI.metric==='dev'?c.len-28:c.len,len:c.len,c}));
+  const W=Math.max(300,box.clientWidth||700),H=UI.range==='3Y'||UI.range==='ALL'?280:250,m={l:34,r:14,t:16,b:30};
+  const pw=W-m.l-m.r,ph=H-m.t-m.b;
+  const t0=ws.getTime(),t1=Math.max(we.getTime(),t0+DAY);
+  const X=d=>m.l+(d.getTime()-t0)/(t1-t0)*pw;
+  let lo,hi;
+  if(UI.metric==='len'){const vs=rows.map(r=>r.v);lo=Math.min(22,...vs)-1;hi=Math.max(34,...vs)+1;}
+  else if(isP){lo=0;hi=Math.max(10,...rows.map(r=>r.v))}
+  else{const a=Math.max(4,...rows.map(r=>Math.abs(r.v)));lo=-a-1;hi=a+1}
+  const Y=v=>m.t+(1-(v-lo)/(hi-lo))*ph;
+  let g='';
+  const step=hi-lo>16?4:2;
+  for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step){g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1" opacity=".6"/><text x="${m.l-6}" y="${Y(v)+4}" text-anchor="end">${v>0&&UI.metric==='dev'?'+'+v:v}</text>`}
+  // month ticks
+  const months=(t1-t0)/(30.4*DAY),every=months>24?6:months>9?2:1;
+  let tk=new Date(ws.getFullYear(),ws.getMonth()+1,1,12);
+  while(tk.getMonth()%every)tk=addM(tk,1);
+  for(;tk<=we;tk=addM(tk,every)){const x=X(tk);g+=`<text x="${x}" y="${H-8}" text-anchor="middle">${MO[tk.getMonth()]}${tk.getMonth()===0||every>=6?" '"+String(tk.getFullYear()).slice(2):''}</text><line x1="${x}" x2="${x}" y1="${H-m.b}" y2="${H-m.b+4}" stroke="var(--ink-3)"/>`}
+  let marks='';
+  if(UI.metric==='len'){
+    g+=`<rect x="${m.l}" width="${pw}" y="${Y(30)}" height="${Y(26)-Y(30)}" fill="var(--accent)" opacity=".07"/><line x1="${m.l}" x2="${W-m.r}" y1="${Y(28)}" y2="${Y(28)}" stroke="var(--ink-2)" stroke-dasharray="4 4"/><text x="${W-m.r}" y="${Y(28)-6}" text-anchor="end" style="fill:var(--ink-2)">28-day ideal</text>`;
+    if(rows.length>1)marks+=`<path d="${rows.map((r,i)=>(i?'L':'M')+X(r.d).toFixed(1)+','+Y(r.v).toFixed(1)).join('')}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>`;
+    rows.forEach((r,i)=>{marks+=`<circle cx="${X(r.d)}" cy="${Y(r.v)}" r="${i===rows.length-1?5.5:4}" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>`});
+  }else{
+    const bw=Math.max(4,Math.min(18,pw/Math.max(rows.length,1)*0.6));
+    rows.forEach(r=>{
+      const x=X(r.d)-bw/2;let y0=Y(isP?0:0),y1=Y(r.v);
+      const col=isP?'var(--men)':(r.v>0?'var(--accent)':r.v<0?'var(--fol)':'var(--ink-3)');
+      if(r.v===0&&!isP){marks+=`<rect x="${x}" y="${y0-1.5}" width="${bw}" height="3" rx="1.5" fill="${col}"/>`;return}
+      const top=Math.min(y0,y1),h=Math.abs(y1-y0),rr=Math.min(4,bw/2,h);
+      const up=y1<y0;
+      const d=up?`M${x},${y0}V${top+rr}Q${x},${top} ${x+rr},${top}H${x+bw-rr}Q${x+bw},${top} ${x+bw},${top+rr}V${y0}Z`:`M${x},${y0}V${y1-rr}Q${x},${y1} ${x+rr},${y1}H${x+bw-rr}Q${x+bw},${y1} ${x+bw},${y1-rr}V${y0}Z`;
+      marks+=`<path d="${d}" fill="${col}"/>`;
+    });
+    g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--ink-3)"/>`;
+  }
+  // hit targets
+  let hits='';
+  rows.forEach((r,i)=>{hits+=`<rect data-i="${i}" x="${X(r.d)-14}" y="${m.t}" width="28" height="${ph}" fill="transparent"/>`});
+  const empty=!rows.length?`<text x="${W/2}" y="${H/2}" text-anchor="middle" style="font-family:var(--body);font-size:14px">No complete cycles in this range</text>`:'';
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${UI.metric==='plen'?'Period length':'Cycle length'} chart">${g}${marks}${hits}${empty}</svg><div class="tip" hidden></div>`;
+  const tip=box.querySelector('.tip');
+  box.querySelectorAll('rect[data-i]').forEach(el=>{
+    const show=()=>{const r=rows[+el.dataset.i];const sx=box.clientWidth/W;
+      tip.innerHTML=isP?`<b>${short(r.d,true)}</b><br>${r.v} days of bleeding${r.p.note?'<br>'+esc(r.p.note):''}`:`<b>Cycle from ${short(r.d,true)}</b><br>${r.len} days${r.len!==28?` (${r.len>28?'+':''}${r.len-28} vs 28)`:' · right on 28'}<br>Moon at start: ${moonPhase(r.d).name}`;
+      tip.style.left=X(r.d)*sx+'px';tip.style.top=(isP||UI.metric==='dev'?Math.min(Y(r.v),Y(0)):Y(r.v))*sx+'px';tip.hidden=false};
+    el.addEventListener('mouseenter',show);el.addEventListener('click',show);el.addEventListener('mouseleave',()=>tip.hidden=true);
+  });
+  // legend & summary
+  $('chartLegend').innerHTML=UI.metric==='dev'?'<span><i class="sw" style="background:var(--accent)"></i>Longer than 28</span><span><i class="sw" style="background:var(--fol)"></i>Shorter than 28</span>':UI.metric==='len'?'<span><i class="sw" style="background:var(--accent);opacity:.25"></i>26–30 day band</span>':'';
+  const vals=rows.map(r=>isP?r.v:r.len);
+  if(vals.length){
+    const cs=isP?null:consistency(vals);
+    $('chartSum').innerHTML=isP?`<span>Average <b>${mean(vals).toFixed(1)}</b> days</span><span>Shortest <b>${Math.min(...vals)}</b></span><span>Longest <b>${Math.max(...vals)}</b></span><span>Periods <b>${vals.length}</b></span>`
+    :`<span>Average <b>${mean(vals).toFixed(1)}</b> days</span><span>Range <b>${Math.min(...vals)}–${Math.max(...vals)}</b></span><span>Variation <b>±${sd(vals).toFixed(1)}</b></span><span>Consistency <b>${cs}</b>/100 (${consLabel(cs)})</span><span>Cycles <b>${vals.length}</b></span>`;
+  }else $('chartSum').innerHTML='';
+  const skipped=CYC.filter(c=>!c.valid&&c.start>=ws&&c.start<=we);
+  if(skipped.length&&!isP)$('chartSum').innerHTML+=`<span class="flag">Left out: ${skipped.map(c=>short(c.start,true)+' ('+esc(c.reason)+', '+c.len+' days)').join('; ')}</span>`;
+  $('chartTable').innerHTML=`<table><thead><tr><th>Start</th><th class="num">Cycle</th><th class="num">vs 28</th><th class="num">Bleeding</th><th>Moon at start</th></tr></thead><tbody>${
+    PER.filter(p=>p.sd>=ws&&p.sd<=we).map(p=>`<tr><td>${short(p.sd,true)}</td><td class="num">${p.cycleLen!=null?(p.cycleValid?p.cycleLen:'('+p.cycleLen+')'):'—'}</td><td class="num">${p.cycleValid?((p.cycleLen-28>0?'+':'')+(p.cycleLen-28)):'—'}</td><td class="num">${p.plen??'—'}</td><td>${moonPhase(p.sd).name}</td></tr>`).join('')}</tbody></table>`;
+}
+function renderMonthStrip(ws,we){
+  let h='';for(let d=new Date(ws);d<=we;d=add(d,1)){const f=info(d);let bg='var(--surface-2)',fg='var(--ink)';
+    if(f){if(f.bleed){bg='var(--men)';fg='#fff'}else if(f.predBleed){bg='color-mix(in srgb,var(--men) 25%,var(--surface))'}else bg=`color-mix(in srgb,var(--${f.phase}) ${f.fertile?32:16}%,var(--surface))`}
+    h+=`<div style="background:${bg};color:${fg}" title="${nice(d)}${f?' · day '+f.cd+' · '+PH[f.phase].name:''}">${d.getDate()}${f&&f.ov?'<br>✦':''}</div>`}
+  $('chartBox').innerHTML=`<div class="month-strip">${h}</div>`;
+  $('chartLegend').innerHTML=['men','fol','ovu','lut'].map(k=>`<span><i class="sw" style="background:var(--${k})"></i>${PH[k].name}</span>`).join('')+'<span>✦ Ovulation (est.)</span>';
+  const ps=PER.filter(p=>p.sd>=ws&&p.sd<=we);
+  $('chartSum').innerHTML=ps.length?ps.map(p=>`<span>Period <b>${short(p.sd)}–${p.ed?short(p.ed):'?'}</b> (${p.plen??'?'} days)${p.cycleLen?` · cycle <b>${p.cycleLen}</b> days`:' · current cycle'}</span>`).join(''):'<span>No period logged this month</span>';
+  $('chartTable').innerHTML='';
+}
+function renderYears(){
+  const ys={};CYC.forEach(c=>{if(!c.valid)return;const y=c.start.getFullYear();(ys[y]=ys[y]||{l:[],p:[]}).l.push(c.len)});
+  PER.forEach(p=>{if(p.plen&&p.plen<=12){const y=p.sd.getFullYear();(ys[y]=ys[y]||{l:[],p:[]}).p.push(p.plen)}});
+  $('yearTable').innerHTML=`<table><thead><tr><th>Year</th><th class="num">Avg cycle</th><th class="num">Range</th><th class="num">Avg bleeding</th><th class="num">Consistency</th><th class="num">Cycles</th></tr></thead><tbody>${
+   Object.keys(ys).sort().map(y=>{const o=ys[y];const c=consistency(o.l);return`<tr><td>${y}</td><td class="num">${o.l.length?mean(o.l).toFixed(1):'—'}</td><td class="num">${o.l.length?Math.min(...o.l)+'–'+Math.max(...o.l):'—'}</td><td class="num">${o.p.length?mean(o.p).toFixed(1):'—'}</td><td class="num">${c??'—'}</td><td class="num">${o.l.length}</td></tr>`}).join('')}</tbody></table>`;
+}
+
+/* ---------- today ---------- */
+function renderWheel(f){
+  const S=300,c=S/2,R=128,w=22,L=f.L;let segs='';
+  for(let i=1;i<=L;i++){
+    const a0=-90+(i-1)/L*360+0.8,a1=-90+i/L*360-0.8;
+    const ph=phaseOf(i,L,f.pl);
+    const p=(a,r)=>[c+r*Math.cos(rad(a)),c+r*Math.sin(rad(a))];
+    const[x0,y0]=p(a0,R),[x1,y1]=p(a1,R),[x2,y2]=p(a1,R-w),[x3,y3]=p(a0,R-w);
+    const on=i===f.cd;
+    segs+=`<path d="M${x0},${y0}A${R},${R} 0 0 1 ${x1},${y1}L${x2},${y2}A${R-w},${R-w} 0 0 0 ${x3},${y3}Z" fill="var(--${ph})" opacity="${on?1:(i<f.cd?.85:.35)}"/>`;
+  }
+  const am=-90+(f.cd-.5)/L*360,mx=c+(R+10)*Math.cos(rad(am)),my=c+(R+10)*Math.sin(rad(am));
+  const ox=-90+(f.O-.5)/L*360,ovx=c+(R-w-12)*Math.cos(rad(ox)),ovy=c+(R-w-12)*Math.sin(rad(ox));
+  $('wheel').innerHTML=`<svg viewBox="0 0 ${S} ${S}" role="img" aria-label="Cycle day ${f.cd} of ${L}">${segs}
+   <circle cx="${mx}" cy="${my}" r="7" fill="var(--ink)" stroke="var(--surface)" stroke-width="3"/>
+   <text x="${ovx}" y="${ovy+5}" text-anchor="middle" style="fill:var(--ovu);font-size:15px">✦</text>
+   <text x="${c}" y="${c-30}" text-anchor="middle" style="fill:var(--ink-3);font-size:11px;letter-spacing:.14em;font-weight:700">CYCLE DAY</text>
+   <text x="${c}" y="${c+18}" text-anchor="middle" style="fill:var(--ink);font-family:var(--display);font-size:56px">${f.cd}</text>
+   <text x="${c}" y="${c+42}" text-anchor="middle" style="fill:var(--ink-2);font-size:13px">of ~${L} · ${PH[f.phase].name}</text></svg>`;
+}
+function renderToday(){
+  const f=info(TODAY);if(!f)return;
+  const mp=moonPhase(TODAY),ms=sign(moonLon(TODAY)),ss=sign(sunLon(TODAY));
+  const ph=PH[f.phase];
+  $('todayEyebrow').textContent='Today · '+nice(TODAY,true);
+  $('topChip').innerHTML=`${moonSVG(mp.age,28)}<span><b>Day ${f.cd}</b> · ${ph.name} · ${mp.name}</span>`;
+  renderWheel(f);
+  const np=nextPeriod();
+  const fertStart=add(f.start,f.O-6),fertEnd=add(f.start,f.O);
+  let fert;
+  if(f.fertile)fert={t:f.ov?'Peak fertility (est. ovulation)':'Fertile window',s:`Estimated ${short(fertStart)}–${short(fertEnd)}. Use protection if avoiding pregnancy.`};
+  else if(f.cd<f.O-5)fert={t:'Lower fertility',s:`Fertile window opens around ${short(fertStart)}.`};
+  else fert={t:'Lower fertility (post-ovulation)',s:`Estimated ovulation was ${short(add(f.start,f.O-1))}. Not reliable as birth control.`};
+  const lt=lunarType(moonAge(f.period.sd));
+  $('todayBanner').innerHTML=f.late?`<div class="banner">Your period is later than your usual ${PRED.L} days. Stress, travel, illness or pregnancy can all shift a cycle; a test can bring clarity.</div>`:
+   f.pms?`<div class="banner"><b>PMS window.</b> Your period is due around ${short(f.nextStart)}. Be gentle with yourself: warm meals, magnesium, early nights. See the PMS care tab below.</div>`:
+   f.fertile?`<div class="banner fert"><b>Fertile window.</b> ${fert.s}</div>`:'';
+  $('facts').innerHTML=`
+   <div class="fact ph-${f.phase}"><span class="eyebrow">Phase</span><span class="t"><span class="pill ph">${ph.name}</span></span><span class="muted">${ph.season} · ${ph.arch} · ${ph.moon}</span></div>
+   <div class="fact"><span class="eyebrow">Fertility</span><span class="t">${fert.t}</span><span class="muted">${fert.s}</span></div>
+   <div class="fact"><span class="eyebrow">Next period</span><span class="t">${np?nice(np.date):'—'}</span><span class="muted">${np?(np.late?np.late+' days past expected':'in '+diff(TODAY,np.date)+' days'):''} · PMS window from ${short(add(f.nextStart,-7))}</span></div>
+   <div class="fact"><span class="eyebrow">Moon</span><span class="t">${moonSVG(mp.age,22)} ${mp.name}</span><span class="muted">${Math.round(illum(mp.age)*100)}% lit · Moon in ${ms[0]} ${ms[1]}</span></div>
+   <div class="fact"><span class="eyebrow">Sun season</span><span class="t">${ss[0]} ${ss[1]}</span><span class="muted">${ss[2]} sign · rules the ${ss[3].toLowerCase()}</span></div>
+   <div class="fact"><span class="eyebrow">This cycle's moon</span><span class="t">${lt} cycle</span><span class="muted">Your period started on a ${moonPhase(f.period.sd).name.toLowerCase()}.</span></div>`;
+}
+
+/* ---------- guidance ---------- */
+function renderGuide(){
+  const d=UI.view,f=info(d);
+  $('dLbl').textContent=nice(d,d.getFullYear()!==TODAY.getFullYear())+(f?` · day ${f.cd}`:'');
+  $('dToday').disabled=F(d)===F(TODAY);
+  if(!f){$('tips3').innerHTML='';$('panel').innerHTML='<p class="muted">No cycle data for this date.</p>';return}
+  const ph=PH[f.phase],mp=moonPhase(d),ms=sign(moonLon(d));
+  $('guideH').textContent=`${ph.name} phase · ${ph.season}`;
+  $('tips3').innerHTML=`
+   <div class="tipcard ph-${f.phase}"><span class="eyebrow">Eat today</span><p>${pick(ph.food.tips,d)}</p></div>
+   <div class="tipcard"><span class="eyebrow">Chinese medicine</span><p>${pick(ph.tcm.tips,d,3)}</p></div>
+   <div class="tipcard"><span class="eyebrow">Moon in ${ms[0]} · ${mp.name}</span><p>${ms[4]}</p></div>
+   ${f.pms||f.phase==='men'?`<div class="tipcard"><span class="eyebrow">${f.pms?'PMS care':'Period care'}</span><p>${f.pms?pick(['Magnesium glycinate in the evening and pumpkin seeds by day can soften PMS.','Rose bud tea and a 20-minute walk move stuck Liver Qi.','Lower salt and caffeine today to ease bloating and breast tenderness.','Write down what irritates you; PMS often shows what needs to change.','Book a quiet evening. Your nervous system needs extra rest before bleeding.'],d):pick(['Warmth on the belly, warm drinks, warm socks.','Let yourself rest without guilt today.','Choose iron-rich food at two meals today.'],d)}</p></div>`:''}`;
+  renderPanel(f,d);
+}
+function li(a){return'<ul>'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>'}
+function renderPanel(f,d){
+  const ph=PH[f.phase],k=f.phase,t=UI.tab;let h='';
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
+  if(t==='food'){
+    h=`<div class="block"><h3>Focus</h3><p>${ph.food.focus}</p><span class="eyebrow">Today's tip</span><p>${pick(ph.food.tips,d)}</p></div>
+     <div class="block"><h3>Foods to favor</h3>${li(ph.food.eat)}</div>
+     <div class="block"><h3>Seed cycling</h3><p>${ph.food.seeds}</p><h3>Go easy on</h3><p>${ph.food.less}</p><h3>Recipe idea</h3><p>${ph.food.recipe}</p></div>`;
+  }else if(t==='herb'){
+    h=`<div class="block" style="grid-column:1/-1"><p>Herbal allies traditionally used in the ${ph.name.toLowerCase()} phase, from Western folk herbalism, Ayurveda and Chinese medicine.</p></div>`+
+     ph.herbs.map(x=>`<div class="block point ph-${k}"><h3>${x[0]}</h3><p class="muted">${x[1]}</p></div>`).join('')+
+     `<div class="block" style="grid-column:1/-1"><h3>Ayurveda</h3><p>${ph.ayur}</p><p class="note">If you are pregnant, trying to conceive, breastfeeding or on medication (including birth control), check with a practitioner before using herbs.</p></div>`;
+  }else if(t==='tcm'){
+    h=`<div class="block"><h3>${ph.tcm.title}</h3><p>${ph.tcm.body}</p><p class="muted"><b>Organs:</b> ${ph.tcm.organs}<br><b>Food nature:</b> ${ph.tcm.nature}</p><span class="eyebrow">Today</span><p>${pick(ph.tcm.tips,d,3)}</p></div>
+     <div class="block"><h3>Acupressure points</h3>${ph.tcm.points.map(p=>`<div class="point ph-${k}"><b>${p[0]}</b><br><span class="muted">${p[1]}</span></div>`).join('')}</div>
+     <div class="block"><h3>More TCM habits this phase</h3>${li(ph.tcm.tips)}</div>`;
+  }else if(t==='moon'){
+    const mp=moonPhase(d),ms=sign(moonLon(d)),ss=sign(sunLon(d)),lt=lunarType(moonAge(f.period.sd));
+    h=`<div class="block"><h3>${moonSVG(mp.age,26)} ${mp.name}</h3><p>${mp.text}</p><p class="muted">${Math.round(illum(mp.age)*100)}% illuminated · moon age ${mp.age.toFixed(1)} days</p></div>
+     <div class="block"><h3>Moon in ${ms[0]} ${ms[1]}</h3><p>${ms[4]}</p><p class="muted"><b>${ms[2]} sign.</b> In ancient melothesia ${ms[0]} rules the ${ms[3].toLowerCase()}. ${ms[5]}</p></div>
+     <div class="block"><h3>Your ${lt} cycle</h3><p>${LUNAR[lt]}</p><p class="muted">Sun in ${ss[0]} ${ss[1]} (${ss[2]}). Your phase mirrors ${ph.moon.toLowerCase()}: ${ph.season.toLowerCase()}, the archetype of ${ph.arch}.</p></div>`;
+  }else if(t==='pms'){
+    const freq={};Object.values(DB.days).forEach(x=>(x.sym||[]).forEach(s=>freq[s]=(freq[s]||0)+1));
+    const top=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    const nps=add(f.nextStart,-7);
+    h=`<div class="block"><h3>Your PMS window</h3><p>${f.pms?'You are in it now.':'Next one starts around '+nice(nps)+'.'} Period expected ${nice(f.nextStart)}.</p><p class="muted">${ph.pms}</p>
+      ${top.length?`<span class="eyebrow">Your most logged symptoms</span>${top.map(([s,n])=>`<div><div class="row" style="justify-content:space-between"><span>${s}</span><span class="num muted">${n}</span></div><div class="meter"><i style="width:${n/top[0][1]*100}%;background:var(--lut)"></i></div></div>`).join('')}`:'<p class="note">Log symptoms by tapping a day in the calendar below; your patterns will show here.</p>'}</div>
+     <div class="block" style="grid-column:span 2;min-width:0"><h3>Remedies by symptom</h3><div class="tbl-wrap"><table><thead><tr><th>Symptom</th><th>Food</th><th>Herbal</th><th>TCM</th></tr></thead><tbody>${
+      Object.entries(REMEDY).map(([s,r])=>`<tr><td><b>${s}</b></td><td style="white-space:normal">${r[0]}</td><td style="white-space:normal">${r[1]}</td><td style="white-space:normal">${r[2]}</td></tr>`).join('')}</tbody></table></div></div>`;
+  }else{
+    h=`<div class="block"><h3>Movement</h3>${li(ph.move)}</div><div class="block"><h3>Ritual · ${ph.arch}</h3><p>${ph.ritual}</p></div><div class="block"><h3>Ayurvedic rhythm</h3><p>${ph.ayur}</p></div>`;
+  }
+  $('panel').innerHTML=h;
+}
+
+/* ---------- calendar ---------- */
+function noteFor(ds){return DB.notes.filter(n=>n.d===ds)}
+function renderCal(){
+  const m=UI.calM;$('calH').textContent=MOL[m.getMonth()]+' '+m.getFullYear();
+  let h=WD.map(w=>`<div class="dow">${w.slice(0,2)}</div>`).join('');
+  const first=add(m,-m.getDay());
+  for(let i=0;i<42;i++){
+    const d=add(first,i),ds=F(d),f=info(d),cls=['day'];
+    if(d.getMonth()!==m.getMonth())cls.push('out');
+    if(f){if(f.bleed)cls.push('bleed');else if(f.predBleed||(f.late&&false))cls.push('pred');else if(f.fertile)cls.push('fert');if(f.ov)cls.push('ov')}
+    if(ds===F(TODAY))cls.push('today');if(ds===F(UI.view))cls.push('sel');
+    const ev=moonEvents(d);
+    const hasNote=noteFor(ds).length||(DB.days[ds]&&((DB.days[ds].sym||[]).length||DB.days[ds].note||DB.days[ds].flow));
+    const label=`${nice(d,true)}${f?`, cycle day ${f.cd}, ${PH[f.phase].name}${f.bleed?', period':''}${f.predBleed?', predicted period':''}${f.fertile?', fertile':''}`:''}${ev?', '+ev+' moon':''}`;
+    h+=`<button class="${cls.join(' ')}" data-d="${ds}" aria-label="${label}"><span class="d">${d.getDate()}</span><span class="marks">${f&&f.pms&&!f.bleed?'<i class="dot"></i>':''}${hasNote?'<i class="dot note"></i>':''}${ev?'<span class="moonmark">'+moonSVG(ev==='new'?0:SYN/2,12)+'</span>':''}</span></button>`;
+    if(i===34&&add(first,35).getMonth()!==m.getMonth())break;
+  }
+  $('cal').innerHTML=h;
+  $('moonLegend').innerHTML=`${moonSVG(SYN/2,12)} Full moon &nbsp; ${moonSVG(0,12)} New moon`;
+  renderDayPanel();
+}
+function renderDayPanel(){
+  const d=UI.view,ds=F(d),f=info(d),rec=DB.days[ds]||{sym:[],flow:'',note:''};
+  const mp=moonPhase(d),ms=sign(moonLon(d));
+  const notes=noteFor(ds);
+  $('dayPanel').innerHTML=`
+   <div class="row" style="justify-content:space-between"><div><h3>${nice(d,true)}</h3><span class="muted">${f?`Cycle day ${f.cd} · ${PH[f.phase].name}${f.bleed?' · period':''}${f.predBleed?' · predicted period':''}${f.fertile?' · fertile window':''}${f.pms?' · PMS window':''}`:'Before your first record'} · ${mp.name} · Moon in ${ms[0]}</span></div>
+   <div class="row"><button class="btn" id="markStart">Period started this day</button><button class="btn" id="markEnd">Period ended this day</button></div></div>
+   ${notes.length?`<div class="chips">${notes.map(n=>`<span class="chip">${esc(n.t)}</span>`).join('')}</div>`:''}
+   <div class="block"><span class="eyebrow">Symptoms</span><div class="chips" id="symChips">${SYMPTOMS.map(s=>`<button class="chip" aria-pressed="${(rec.sym||[]).includes(s)}" data-s="${s}">${s}</button>`).join('')}</div></div>
+   <div class="row"><label class="row" style="gap:6px;font-weight:700;font-size:13px">Flow <select id="flowSel">${['','Spotting','Light','Medium','Heavy'].map(o=>`<option ${rec.flow===o?'selected':''} value="${o}">${o||'None'}</option>`).join('')}</select></label></div>
+   <textarea id="dayNote" rows="2" placeholder="How do you feel today? Mood, energy, cravings, dreams…">${esc(rec.note||'')}</textarea>
+   <div class="row"><button class="btn primary" id="saveDay">Save day</button><button class="btn" id="seeGuide">See this day's guidance</button></div>`;
+  $('symChips').onclick=e=>{const b=e.target.closest('button[data-s]');if(b)b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true')};
+  $('saveDay').onclick=()=>{
+    const sym=[...document.querySelectorAll('#symChips button[aria-pressed="true"]')].map(b=>b.dataset.s);
+    const r={sym,flow:$('flowSel').value,note:$('dayNote').value.trim()};
+    if(!sym.length&&!r.flow&&!r.note)delete DB.days[ds];else DB.days[ds]=r;
+    save();renderCal();if(UI.tab==='pms')renderGuide();toast('Saved');
+  };
+  $('seeGuide').onclick=()=>{renderGuide();$('guide').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
+  $('markStart').onclick=()=>{
+    if(DB.periods.some(p=>p.s===ds)){toast('A period already starts on this day');return}
+    DB.periods.push({s:ds,e:F(add(d,PRED.P-1)),note:'End date estimated, update when it ends'});save();refresh();toast('Period start added');
+  };
+  $('markEnd').onclick=()=>{
+    const p=DB.periods.filter(p=>p.s<=ds).sort((a,b)=>a.s<b.s?1:-1)[0];
+    if(!p){toast('Add a period start first');return}
+    p.e=ds;if(p.note==='End date estimated, update when it ends')p.note='';save();refresh();toast('Period end set to '+short(d));
+  };
+}
+
+/* ---------- diary ---------- */
+let pendingDel=null;
+function renderDiary(){
+  const rows=PER.slice().reverse();
+  $('diary').innerHTML=`<table><thead><tr><th>Started</th><th>Ended</th><th class="num">Days</th><th class="num">Cycle</th><th>Moon at start</th><th>Notes</th><th></th></tr></thead><tbody>${
+   rows.map(p=>{const mp=moonPhase(p.sd);const del=pendingDel===p.s;
+    return`<tr><td>${short(p.sd,true)}${p.st?` <span class="muted">${esc(p.st)}</span>`:''}</td><td>${p.ed?short(p.ed):'—'}${p.et?` <span class="muted">${esc(p.et)}</span>`:''}</td><td class="num">${p.plen??'—'}</td><td class="num">${p.cycleLen!=null?(p.cycleValid?p.cycleLen:`<span class="flag">${p.cycleLen}</span>`):'<span class="muted">now</span>'}</td><td><span class="row" style="gap:6px;flex-wrap:nowrap">${moonSVG(mp.age,14)}${mp.name}</span></td><td style="white-space:normal;min-width:180px">${esc(p.note||'')}${p.gap?` <span class="flag">${esc(p.gap)}</span>`:''}</td><td>${del?`<button class="linkbtn" data-delok="${p.s}">Confirm delete</button> <button class="linkbtn" data-delno="1" style="color:var(--ink-2)">Keep</button>`:`<button class="linkbtn" data-del="${p.s}" style="color:var(--ink-3)">Delete</button>`}</td></tr>`}).join('')}</tbody></table>`;
+  $('notesList').innerHTML=DB.notes.length?`<div class="tbl-wrap"><table><tbody>${DB.notes.slice().sort((a,b)=>a.d<b.d?1:-1).map(n=>`<tr><td>${short(P(n.d),true)}</td><td style="white-space:normal">${esc(n.t)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">No notes yet.</p>';
+}
+$('diary').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.del){pendingDel=b.dataset.del;renderDiary()}
+  else if(b.dataset.delno){pendingDel=null;renderDiary()}
+  else if(b.dataset.delok){DB.periods=DB.periods.filter(p=>p.s!==b.dataset.delok);pendingDel=null;save();refresh();toast('Period deleted')}
+});
+$('addForm').addEventListener('submit',e=>{
+  e.preventDefault();const s=$('fStart').value;if(!s)return;
+  if(DB.periods.some(p=>p.s===s)){toast('That start date is already in your diary');return}
+  const e2=$('fEnd').value;if(e2&&e2<s){toast('End date is before the start date');return}
+  DB.periods.push({s,st:$('fStartT').value.trim(),e:e2||'',et:$('fEndT').value.trim(),note:$('fNote').value.trim()});
+  save();e.target.reset();refresh();toast('Period added');
+});
+$('exportBtn').onclick=()=>{
+  const box=$('ioBox');box.hidden=false;
+  box.innerHTML=`<h3>Your backup</h3><p class="muted">Copy this text and keep it somewhere safe (notes app, email to yourself). Paste it into Restore on any device.</p><textarea id="ioText" rows="5" readonly>${esc(JSON.stringify(DB))}</textarea><div class="row"><button class="btn primary" id="copyBtn">Copy</button><button class="btn" id="ioClose">Close</button></div>`;
+  $('copyBtn').onclick=()=>{const t=$('ioText');navigator.clipboard&&navigator.clipboard.writeText(t.value).then(()=>toast('Copied'),()=>{t.select();toast('Selected, press copy')})||(t.select(),toast('Selected, press copy'))};
+  $('ioClose').onclick=()=>box.hidden=true;
+};
+$('importBtn').onclick=()=>{
+  const box=$('ioBox');box.hidden=false;
+  box.innerHTML=`<h3>Restore from backup</h3><textarea id="ioText" rows="5" placeholder="Paste your backup text here"></textarea><div class="row"><button class="btn primary" id="ioApply">Restore</button><button class="btn danger" id="ioReset">Reset to original diary</button><button class="btn" id="ioClose">Close</button></div><p class="note" id="ioMsg"></p>`;
+  $('ioApply').onclick=()=>{try{const d=JSON.parse($('ioText').value);if(!Array.isArray(d.periods))throw 0;DB=Object.assign({notes:[],days:{}},d);save();refresh();box.hidden=true;toast('Restored')}catch(_){$('ioMsg').textContent='That text is not a valid backup. Paste the full text from "Back up data".'}};
+  let armed=false;$('ioReset').onclick=e=>{if(!armed){armed=true;e.target.textContent='Tap again to erase your changes';return}DB=clone(SEED);save();refresh();box.hidden=true;toast('Original diary restored')};
+  $('ioClose').onclick=()=>box.hidden=true;
+};
+
+/* ---------- wiring ---------- */
+function setSeg(id,attr,val){document.querySelectorAll('#'+id+' button').forEach(b=>b.setAttribute('aria-pressed',b.dataset[attr]===val))}
+$('metricSeg').onclick=e=>{const b=e.target.closest('button');if(!b)return;UI.metric=b.dataset.m;pref('metric',UI.metric);setSeg('metricSeg','m',UI.metric);renderChart()};
+$('rangeSeg').onclick=e=>{const b=e.target.closest('button');if(!b)return;UI.range=b.dataset.r;pref('range',UI.range);UI.winEnd=TODAY;setSeg('rangeSeg','r',UI.range);renderChart()};
+$('prevWin').onclick=()=>{const n=RANGE[UI.range];UI.winEnd=UI.range==='1M'?add(new Date(UI.winEnd.getFullYear(),UI.winEnd.getMonth(),1,12),-1):addM(UI.winEnd,-n);if(UI.range!=='1M'){UI.winEnd.setDate(Math.min(TODAY.getDate(),28))}renderChart()};
+$('nextWin').onclick=()=>{const n=RANGE[UI.range];let e=UI.range==='1M'?add(addM(new Date(UI.winEnd.getFullYear(),UI.winEnd.getMonth(),1,12),1),0):addM(UI.winEnd,n);if(UI.range!=='1M')e.setDate(Math.min(TODAY.getDate(),28));if(e>TODAY)e=TODAY;UI.winEnd=e;renderChart()};
+const tt=$('trendToggle');
+function setTrend(open){tt.setAttribute('aria-expanded',open);$('trends').hidden=!open;pref('trends',open?'1':'0');if(open)renderChart()}
+tt.onclick=()=>setTrend(tt.getAttribute('aria-expanded')!=='true');
+$('tblToggle').onclick=e=>{const o=$('chartTable').hidden;$('chartTable').hidden=!o;e.target.setAttribute('aria-expanded',o);e.target.textContent=o?'Hide table':'Show as table'};
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;UI.tab=b.dataset.t;const f=info(UI.view);if(f)renderPanel(f,UI.view)};
+$('dPrev').onclick=()=>{UI.view=add(UI.view,-1);syncView()};
+$('dNext').onclick=()=>{UI.view=add(UI.view,1);syncView()};
+$('dToday').onclick=()=>{UI.view=TODAY;syncView()};
+function syncView(){const m=UI.view;if(m.getMonth()!==UI.calM.getMonth()||m.getFullYear()!==UI.calM.getFullYear())UI.calM=new Date(m.getFullYear(),m.getMonth(),1,12);renderGuide();renderCal()}
+$('cal').onclick=e=>{const b=e.target.closest('button[data-d]');if(!b)return;UI.view=P(b.dataset.d);syncView()};
+$('cPrev').onclick=()=>{UI.calM=addM(UI.calM,-1);renderCal()};
+$('cNext').onclick=()=>{UI.calM=addM(UI.calM,1);renderCal()};
+$('cToday').onclick=()=>{UI.calM=new Date(TODAY.getFullYear(),TODAY.getMonth(),1,12);UI.view=TODAY;renderCal();renderGuide()};
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$('trends').hidden)renderChart()},150)});
+
+function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderToday();renderGuide();renderCal();renderDiary()}
+setSeg('metricSeg','m',UI.metric);setSeg('rangeSeg','r',UI.range);
+rebuild();
+if(pref('trends')==='0'){tt.setAttribute('aria-expanded','false');$('trends').hidden=true}
+refresh();
+})();
+</script>
