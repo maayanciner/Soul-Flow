@@ -162,6 +162,13 @@ footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
 .lastline{background:color-mix(in srgb,var(--lut) 16%,var(--surface));color:var(--ink);padding-block:10px}
 .lastline .d{font-size:clamp(18px,3vw,22px)}
 .lastline .c{color:var(--ink-2)}
+.weightline{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding-block:12px;align-items:center}
+.wstats{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:baseline}
+.wstats b{font-family:var(--display);font-weight:400;font-size:20px}
+.wstats .c{color:var(--ink-2);font-weight:500;font-size:14px}
+.wform{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}
+.wform input{width:96px}
+.whist{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px}
 .install summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .install ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 </style>
@@ -171,6 +178,18 @@ footer{font-size:12.5px;color:var(--ink-3);max-width:70ch}
   <div class="toplines">
     <div class="nextline" id="nextLine" role="status"></div>
     <div class="nextline lastline" id="lastLine"></div>
+    <div class="nextline weightline">
+      <span class="k">Weight</span>
+      <div class="wstats" id="wStats"></div>
+      <form class="wform" id="wForm" autocomplete="off">
+        <label for="wInput" class="k" style="opacity:1">Today's weight</label>
+        <input type="number" id="wInput" inputmode="decimal" step="0.1" min="20" max="700" placeholder="0.0" required>
+        <select id="wUnit" aria-label="Unit"><option value="lb">lb</option><option value="kg">kg</option></select>
+        <button class="btn primary" type="submit">Save</button>
+        <button class="linkbtn" type="button" id="wHistBtn" aria-expanded="false">History</button>
+      </form>
+      <div id="wHist" hidden class="whist"></div>
+    </div>
   </div>
   <header class="top">
     <div class="brand">
@@ -384,11 +403,11 @@ const SEED={periods:[
 {d:'2025-12-28',t:'Unprotected sex'},
 {d:'2025-12-29',t:'Took Plan B'},
 {d:'2026-01-09',t:'Unprotected sex'}
-],days:{}};
+],days:{},weights:[]};
 
 const KEY='soulflow-cycle-v1';
 function clone(o){return JSON.parse(JSON.stringify(o))}
-let DB=(function(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&Array.isArray(d.periods))return Object.assign({notes:[],days:{}},d)}}catch(e){}return clone(SEED)})();
+let DB=(function(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&Array.isArray(d.periods))return Object.assign({notes:[],days:{},weights:[]},d)}}catch(e){}return clone(SEED)})();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 function pref(k,v){try{if(v===undefined)return localStorage.getItem('sf-'+k);localStorage.setItem('sf-'+k,v)}catch(e){return null}}
 
@@ -747,6 +766,30 @@ function renderLastLine(){
   const ago=diff(last.sd,TODAY);
   $('lastLine').innerHTML=`<span class="k">Last period was</span><span class="d">${nice(last.sd,true)}${last.ed?' – '+short(last.ed):''}</span><span class="c">${ago===0?'Started today':ago===1?'Started yesterday':ago+' days ago'}${last.plen?' · '+last.plen+' days long':''}</span>`;
 }
+function renderWeight(){
+  if(!DB.weights)DB.weights=[];
+  const unit=pref('wunit')||'lb';$('wUnit').value=unit;
+  const W=DB.weights.slice().sort((a,b)=>a.d<b.d?-1:1),cur=W[W.length-1],prev=W[W.length-2];
+  const fmtW=x=>(Math.round(x.w*10)/10)+' '+(x.u||unit);
+  if(!cur){$('wStats').innerHTML='<span class="c">Type your weight and tap Save. Today\'s date is added for you.</span>';}
+  else{
+    let ch='';if(prev&&(prev.u||unit)===(cur.u||unit)){const d=Math.round((cur.w-prev.w)*10)/10;ch=d===0?' · no change':` · ${d>0?'+':''}${d} ${cur.u||unit}`}
+    $('wStats').innerHTML=`<span><span class="c">Current weight </span><b>${fmtW(cur)}</b><span class="c"> · ${short(P(cur.d),true)}${ch}</span></span>`+
+      (prev?`<span><span class="c">Last time weighed </span><b>${fmtW(prev)}</b><span class="c"> · ${short(P(prev.d),true)}</span></span>`:'');
+  }
+  $('wHist').innerHTML=W.length?W.slice().reverse().map(x=>`<span class="chip">${short(P(x.d),true)}: ${fmtW(x)} <button class="linkbtn" data-wdel="${x.d}" aria-label="Delete ${short(P(x.d),true)}" style="color:var(--ink-3)">×</button></span>`).join(''):'<span class="note">No weights saved yet.</span>';
+}
+$('wForm').addEventListener('submit',e=>{
+  e.preventDefault();const v=parseFloat($('wInput').value);if(!(v>0)){toast('Enter your weight as a number');return}
+  const n=new Date(),d=F(new Date(n.getFullYear(),n.getMonth(),n.getDate(),12)),u=$('wUnit').value;
+  if(!DB.weights)DB.weights=[];
+  const had=DB.weights.some(x=>x.d===d);
+  DB.weights=DB.weights.filter(x=>x.d!==d);DB.weights.push({d,w:v,u});
+  save();$('wInput').value='';renderWeight();toast(had?'Today\'s weight updated':'Weight saved for '+short(P(d)));
+});
+$('wUnit').onchange=e=>{pref('wunit',e.target.value);renderWeight()};
+$('wHistBtn').onclick=e=>{const h=$('wHist');h.hidden=!h.hidden;e.target.setAttribute('aria-expanded',!h.hidden);e.target.textContent=h.hidden?'History':'Hide history'};
+$('wHist').addEventListener('click',e=>{const b=e.target.closest('button[data-wdel]');if(!b)return;DB.weights=DB.weights.filter(x=>x.d!==b.dataset.wdel);save();renderWeight();toast('Weight deleted')});
 function renderToday(){
   const f=info(TODAY);if(!f)return;
   const mp=moonPhase(TODAY),ms=sign(moonLon(TODAY)),ss=sign(sunLon(TODAY));
@@ -906,7 +949,7 @@ $('exportBtn').onclick=()=>{
 $('importBtn').onclick=()=>{
   const box=$('ioBox');box.hidden=false;
   box.innerHTML=`<h3>Restore from backup</h3><textarea id="ioText" rows="5" placeholder="Paste your backup text here"></textarea><div class="row"><button class="btn primary" id="ioApply">Restore</button><button class="btn danger" id="ioReset">Reset to original diary</button><button class="btn" id="ioClose">Close</button></div><p class="note" id="ioMsg"></p>`;
-  $('ioApply').onclick=()=>{try{const d=JSON.parse($('ioText').value);if(!Array.isArray(d.periods))throw 0;DB=Object.assign({notes:[],days:{}},d);save();refresh();box.hidden=true;toast('Restored')}catch(_){$('ioMsg').textContent='That text is not a valid backup. Paste the full text from "Back up data".'}};
+  $('ioApply').onclick=()=>{try{const d=JSON.parse($('ioText').value);if(!Array.isArray(d.periods))throw 0;DB=Object.assign({notes:[],days:{},weights:[]},d);save();refresh();box.hidden=true;toast('Restored')}catch(_){$('ioMsg').textContent='That text is not a valid backup. Paste the full text from "Back up data".'}};
   let armed=false;$('ioReset').onclick=e=>{if(!armed){armed=true;e.target.textContent='Tap again to erase your changes';return}DB=clone(SEED);save();refresh();box.hidden=true;toast('Original diary restored')};
   $('ioClose').onclick=()=>box.hidden=true;
 };
@@ -976,7 +1019,7 @@ function renderNote(){
   $('noteDate').textContent=nice(TODAY);$('noteH').textContent=n[0];$('noteText').textContent=n[1];
 }
 
-function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderNextLine();renderLastLine();renderToday();renderNote();renderGuide();renderCal();renderDiary()}
+function refresh(){rebuild();renderKPIs();renderYears();if(!$('trends').hidden)renderChart();renderNextLine();renderLastLine();renderWeight();renderToday();renderNote();renderGuide();renderCal();renderDiary()}
 setSeg('metricSeg','m',UI.metric);setSeg('rangeSeg','r',UI.range);
 rebuild();
 if(pref('trends')==='0'){tt.setAttribute('aria-expanded','false');$('trends').hidden=true}
